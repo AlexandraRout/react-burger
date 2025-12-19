@@ -1,46 +1,50 @@
-# Getting Started with Create React App
+# Stellar Burger
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Веб-приложение для заказа космических бургеров. Проект разработан с использованием React и TypeScript.
 
-## Available Scripts
+## Описание проекта
 
-In the project directory, you can run:
+Stellar Burger — это интерактивное приложение для создания и заказа бургеров в космическом стиле. Пользователи могут собирать свои уникальные бургеры из различных ингредиентов, размещать заказы и отслеживать их статус.
+
+## Доступные скрипты
+
+В директории проекта вы можете запустить:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Запускает приложение в режиме разработки.\
+Откройте [http://localhost:3000](http://localhost:3000) для просмотра в браузере.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Страница автоматически перезагрузится при внесении изменений.\
+Вы также увидите ошибки линтера в консоли.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Запускает тестовый раннер в интерактивном режиме.\
+Тесты будут выполняться в режиме watch mode.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Собирает приложение для production в папку `build`.\
+React корректно собирается в production режиме и оптимизирует сборку для лучшей производительности.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Сборка минифицирована, и имена файлов включают хеши.\
+Приложение готово к развертыванию!
 
 ### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Примечание: это необратимая операция. После выполнения `eject`, вы не сможете вернуться назад!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Если вас не устраивают инструменты сборки и конфигурация, вы можете выполнить `eject` в любое время. Эта команда удалит единственную зависимость сборки из вашего проекта.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Вместо этого она скопирует все файлы конфигурации и транзитивные зависимости (webpack, Babel, ESLint и т.д.) прямо в ваш проект, чтобы у вас был полный контроль над ними. Все команды, кроме `eject`, будут продолжать работать, но они будут указывать на скопированные скрипты, чтобы вы могли их настроить. На этом этапе вы предоставлены сами себе.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Вам не обязательно использовать `eject`. Набор функций подходит для небольших и средних развертываний, и вы не должны чувствовать себя обязанными использовать эту функцию.
 
-## Learn More
+## Технологии
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- React 18.3.1
+- TypeScript 4.9.5
+- React Scripts 5.0.1
+- Testing Library
+- UI компоненты от Яндекс.Практикум
