@@ -1,0 +1,6 @@
+.order_summary {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 40px 20px 40px;
+}

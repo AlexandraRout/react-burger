@@ -1,0 +1,11 @@
+.burger_ingredients {
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+}
+
+.ingredients_scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 40px;
+}

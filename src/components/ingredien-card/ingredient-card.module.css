@@ -1,0 +1,25 @@
+.ingredient_card {
+  display: grid;
+  justify-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+}
+
+.price {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.name {
+  text-align: center;
+  line-height: 1.5;
+  min-height: calc(1.5em * 2);
+}
+
+
