@@ -6,12 +6,12 @@ import OrderDetails from '../order-details/order-details';
 import useModal from '../../hooks/use-modal';
 import orderSummaryStyles from './order-summary.module.css';
 
-export default function OrderSummary({ count, orderId }) {
+export default function OrderSummary({ totalPrice, orderId }) {
   const { isOpen, open, close } = useModal();
 
   return (
     <div className={orderSummaryStyles.order_summary}>
-      <div className="text text_type_digits-medium mr-2">{count}</div>
+      <div className="text text_type_digits-medium mr-2">{totalPrice}</div>
       <CurrencyIcon type="primary" />
       <Button htmlType="button" type="primary" size="medium" extraClass="ml-10" onClick={open}>Оформить заказ</Button>
       {isOpen && (
@@ -27,6 +27,6 @@ export default function OrderSummary({ count, orderId }) {
 }
 
 OrderSummary.propTypes = {
-  count: PropTypes.number.isRequired,
+  totalPrice: PropTypes.number.isRequired,
   orderId: PropTypes.number.isRequired,
 };

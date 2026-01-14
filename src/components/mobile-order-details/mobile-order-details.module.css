@@ -5,30 +5,3 @@
     padding-bottom: 72px;
   }
 }
-
-.ingredient {
-  display: flex;
-  align-items: center;
-  padding: 16px 0;
-  box-shadow: 0 1px 0 rgba(47, 47, 55, 1);
-}
-
-.ingredient_container {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-}
-
-.image {
-  max-width: 100%;
-  height: auto;
-}
-
-.element_name {
-  flex: 1;
-}
-
-.icon {
-  flex-shrink: 0;
-}

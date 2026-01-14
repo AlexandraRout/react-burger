@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import mobileBarStyles from './mobile-bar.module.css';
 
 export default function MobileBar({
-  count,
+  totalPrice,
   buttonText,
-  onClick,
-  children,
+  onClick = null,
+  children = null,
 }) {
   return (
     <div className={mobileBarStyles.mobile_bar}>
-      <p className="text text_type_digits-default mr-2">{count}</p>
+      <p className="text text_type_digits-default mr-2">{totalPrice}</p>
       <CurrencyIcon type="primary" />
       <Button
         htmlType="button"
@@ -28,13 +28,8 @@ export default function MobileBar({
   );
 }
 
-MobileBar.defaultProps = {
-  onClick: null,
-  children: null,
-};
-
 MobileBar.propTypes = {
-  count: PropTypes.number.isRequired,
+  totalPrice: PropTypes.number.isRequired,
   buttonText: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   children: PropTypes.node,

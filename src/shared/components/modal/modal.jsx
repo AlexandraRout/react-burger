@@ -6,7 +6,7 @@ import ModalOverlay from '../modal-overlay/modal-overlay';
 import modalStyles from './modal.module.css';
 
 export default function Modal({
-  isOpen, title, children, onClose,
+  isOpen, title = '', children = null, onClose,
 }) {
   const modalRoot = document.getElementById('react-modals');
 
@@ -47,11 +47,6 @@ export default function Modal({
     modalRoot,
   );
 }
-
-Modal.defaultProps = {
-  title: '',
-  children: null,
-};
 
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,

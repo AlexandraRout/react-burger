@@ -4,13 +4,19 @@ import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import useFetch from '../../hooks/use-fetch';
-import ShowOrderMobileBar from '../show-order-mobile-bar/show-order-mobile-bar';
+import OrderSummaryMobileBar from '../order-summary-mobile-bar/order-summary-mobile-bar';
 import appStyles from './app.module.css';
 
 export default function App() {
   const { data, isLoading, error } = useFetch('/ingredients');
 
-  const count = data && data.data ? data.data.reduce((acc, cur) => acc + cur.price, 0) : 0;
+  const bun = data && data.data ? data.data.find((item) => item.type === 'bun') : null;
+  const fillings = data && data.data ? data.data.filter((item) => item.type !== 'bun') : [];
+
+  const bunPrice = bun ? bun.price * 2 : 0;
+  const fillingsPrice = fillings.reduce((sum, item) => sum + item.price, 0);
+  const totalPrice = bunPrice + fillingsPrice;
+
   const orderId = 453438;
 
   return (
@@ -28,11 +34,21 @@ export default function App() {
               <div className={appStyles.burger_container}>
                 <BurgerIngredients ingredients={data.data} />
                 <div className={appStyles.burger_constructor}>
-                  <BurgerConstructor ingredients={data.data} count={count} orderId={orderId} />
+                  <BurgerConstructor
+                    bun={bun}
+                    fillings={fillings}
+                    totalPrice={totalPrice}
+                    orderId={orderId}
+                  />
                 </div>
               </div>
               <div className={appStyles.app_mobile_bar}>
-                <ShowOrderMobileBar ingredients={data.data} count={count} orderId={orderId} />
+                <OrderSummaryMobileBar
+                  bun={bun}
+                  fillings={fillings}
+                  totalPrice={totalPrice}
+                  orderId={orderId}
+                />
               </div>
             </>
             )}

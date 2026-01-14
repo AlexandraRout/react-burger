@@ -5,32 +5,32 @@ import burgerConstructorStyles from './burger-constructor.module.css';
 import ingredientPropType from '../../shared/types/ingredient-prop-type';
 import OrderSummary from '../order-summary/order-summary';
 
-export default function BurgerConstructor({ ingredients, count, orderId }) {
+export default function BurgerConstructor({
+  bun, fillings, totalPrice, orderId,
+}) {
   return (
     <section className={burgerConstructorStyles.burger_constructor}>
       <div className={burgerConstructorStyles.burger_constructor_container}>
         <ConstructorElement
           type="top"
           isLocked
-          text={ingredients[0].name}
-          price={ingredients[0].price}
-          thumbnail={ingredients[0].image}
+          text={`${bun.name} (вверх)`}
+          price={bun.price}
+          thumbnail={bun.image}
           extraClass={burgerConstructorStyles.base_element}
         />
 
         <div className={burgerConstructorStyles.elements_scroll}>
-          {ingredients.map((ingredient, index) => (
+          {fillings.map((filling) => (
             <div
               className={burgerConstructorStyles.element}
-              /* eslint-disable-next-line react/no-array-index-key */
-              key={ingredient.name + index}
+              key={filling._id}
             >
               <DragIcon type="primary" />
               <ConstructorElement
-                key={ingredient.name}
-                text={ingredient.name}
-                price={ingredient.price}
-                thumbnail={ingredient.image}
+                text={filling.name}
+                price={filling.price}
+                thumbnail={filling.image}
               />
             </div>
           ))}
@@ -39,20 +39,21 @@ export default function BurgerConstructor({ ingredients, count, orderId }) {
         <ConstructorElement
           type="bottom"
           isLocked
-          text={ingredients[1].name}
-          price={ingredients[1].price}
-          thumbnail={ingredients[1].image}
+          text={`${bun.name} (низ)`}
+          price={bun.price}
+          thumbnail={bun.image}
           extraClass={burgerConstructorStyles.base_element}
         />
       </div>
 
-      <OrderSummary count={count} orderId={orderId} />
+      <OrderSummary totalPrice={totalPrice} orderId={orderId} />
     </section>
   );
 }
 
 BurgerConstructor.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
-  count: PropTypes.number.isRequired,
+  bun: ingredientPropType.isRequired,
+  fillings: PropTypes.arrayOf(ingredientPropType).isRequired,
+  totalPrice: PropTypes.number.isRequired,
   orderId: PropTypes.number.isRequired,
 };

@@ -4,7 +4,9 @@ import IngredientsCard from '../ingredien-card/ingredien-card';
 import ingredientPropType from '../../shared/types/ingredient-prop-type';
 import ingredientsSectionStyles from './ingredients-section.module.css';
 
-const IngredientsSection = forwardRef(({ title, type, ingredients }, ref) => {
+const IngredientsSection = forwardRef(({
+  title, type, ingredients, onClick,
+}, ref) => {
   const filteredIngredients = ingredients.filter(
     (item) => item.type === type,
   );
@@ -20,8 +22,8 @@ const IngredientsSection = forwardRef(({ title, type, ingredients }, ref) => {
       </h2>
       <ul className={ingredientsSectionStyles.list}>
         {filteredIngredients.map((ingredient) => (
-          <li key={ingredient.name}>
-            <IngredientsCard ingredient={ingredient} />
+          <li key={ingredient._id}>
+            <IngredientsCard ingredient={ingredient} onClick={onClick} />
           </li>
         ))}
       </ul>
@@ -33,6 +35,7 @@ IngredientsSection.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default IngredientsSection;

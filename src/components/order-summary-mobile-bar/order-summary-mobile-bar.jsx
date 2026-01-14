@@ -6,7 +6,9 @@ import Modal from '../../shared/components/modal/modal';
 import OrderDetails from '../order-details/order-details';
 import MobileOrderDetails from '../mobile-order-details/mobile-order-details';
 
-export default function ShowOrderMobileBar({ ingredients, count, orderId }) {
+export default function OrderSummaryMobileBar({
+  bun, fillings, totalPrice, orderId,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOrdered, setIsOrdered] = useState(false);
 
@@ -15,7 +17,7 @@ export default function ShowOrderMobileBar({ ingredients, count, orderId }) {
 
   return (
     <MobileBar
-      count={count}
+      totalPrice={totalPrice}
       buttonText="Смотреть заказ"
       onClick={open}
     >
@@ -29,8 +31,9 @@ export default function ShowOrderMobileBar({ ingredients, count, orderId }) {
           <OrderDetails orderId={orderId} />
         ) : (
           <MobileOrderDetails
-            ingredients={ingredients}
-            count={count}
+            bun={bun}
+            fillings={fillings}
+            totalPrice={totalPrice}
             orderId={orderId}
             setIsOrdered={setIsOrdered}
           />
@@ -41,8 +44,9 @@ export default function ShowOrderMobileBar({ ingredients, count, orderId }) {
   );
 }
 
-ShowOrderMobileBar.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
-  count: PropTypes.number.isRequired,
+OrderSummaryMobileBar.propTypes = {
+  bun: ingredientPropType.isRequired,
+  fillings: PropTypes.arrayOf(ingredientPropType).isRequired,
+  totalPrice: PropTypes.number.isRequired,
   orderId: PropTypes.number.isRequired,
 };
