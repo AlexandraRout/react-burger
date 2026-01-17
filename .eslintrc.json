@@ -11,6 +11,12 @@
     "react": {
       "version": "detect"
     }
+  },
+  "rules": {
+    "react/require-default-props": ["error", {
+      "functions": "defaultArguments"
+    }],
+    "no-underscore-dangle": "off"
   }
 }
 

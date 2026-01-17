@@ -1,0 +1,42 @@
+.burger_constructor {
+  display: flex;
+  flex-direction: column;
+}
+
+.burger_constructor_container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-end;
+  overflow-y: hidden;
+}
+
+.elements_scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.element {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.base_element {
+  flex-grow: 0;
+  margin-right: 20px;
+}
+
+.order {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 40px 20px 40px;
+}
+

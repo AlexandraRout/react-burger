@@ -1,0 +1,7 @@
+.mobile_order_details {
+  padding-bottom: 36px;
+
+  @media (max-width: 796px) {
+    padding-bottom: 72px;
+  }
+}

@@ -1,0 +1,57 @@
+.app_container {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+
+  @media (max-width: 1228px) {
+    padding-bottom: 72px;
+  }
+}
+
+.app_content {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.app_content_container {
+  height: 100%;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 36px;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 796px) {
+    margin: 0 24px;
+  }
+}
+
+.burger_container {
+  flex: 1;
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 40px;
+
+  @media (max-width: 1228px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.burger_constructor {
+  display: flex;
+  min-height: 0;
+
+  @media (max-width: 1228px) {
+    display: none;
+  }
+}
+
+.app_mobile_bar {
+  @media (min-width: 1229px) {
+    display: none;
+  }
+}

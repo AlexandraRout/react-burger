@@ -1,0 +1,39 @@
+.app_header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background: var(--modal-bg);
+}
+
+.app_header_container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1280px;
+  padding: 16px 0;
+  margin: 0 16px;
+}
+
+.nav_left {
+  display: flex;
+  white-space: nowrap;
+  flex: 1;
+  gap: 8px;
+}
+
+.nav_right {
+  display: flex;
+  justify-content: end;
+  flex: 1;
+}
+
+.logo {
+  @media (max-width: 580px) {
+    width: 160px;
+  }
+}
+
+
+
+
+

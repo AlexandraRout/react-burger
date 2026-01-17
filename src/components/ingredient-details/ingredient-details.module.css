@@ -1,0 +1,12 @@
+.ingredient_details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+}
