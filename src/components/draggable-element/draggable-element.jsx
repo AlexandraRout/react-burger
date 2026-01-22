@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { moveIngredient } from '../../services/burger-constructor/burger-constructor.slice';
+import { moveIngredientInConstructor } from '../../services/burger-constructor/burger-constructor.slice';
 import { selectFillings } from '../../services/burger-constructor/burger-constructor.selectors';
 import ingredientPropType from '../../shared/types/ingredient-prop-type';
 
@@ -30,7 +30,7 @@ export default function DraggableElement({ ingredient, index, children }) {
       const from = fillings.findIndex((filling) => filling.uuid === item.uuid);
       if (from === -1 || from === index) return;
 
-      dispatch(moveIngredient({ from, to: index }));
+      dispatch(moveIngredientInConstructor({ from, to: index }));
     },
   });
 

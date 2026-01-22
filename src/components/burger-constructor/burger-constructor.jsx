@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import burgerConstructorStyles from './burger-constructor.module.css';
 import OrderSummary from '../order-summary/order-summary';
-import { addIngredient, removeIngredient } from '../../services/burger-constructor/burger-constructor.slice';
+import { addIngredientToConstructor, removeIngredientFromConstructor } from '../../services/burger-constructor/burger-constructor.slice';
 import { updateTotalPrice } from '../../services/order/order.slice';
 import calculateTotalPrice from '../../utils/calculate-total-price';
 import DraggableDesktopElement from '../draggable-desktop-element/draggable-desktop-element';
@@ -23,22 +23,29 @@ export default function BurgerConstructor() {
   }, [dispatch, ingredients]);
 
   const handleClose = (ingredient) => {
-    dispatch(removeIngredient(ingredient.uuid));
+    dispatch(removeIngredientFromConstructor(ingredient.uuid));
   };
 
   const handleDrop = ({ ingredient }) => {
-    dispatch(addIngredient(ingredient));
+    dispatch(addIngredientToConstructor(ingredient));
   };
 
-  const [, dropTarget] = useDrop({
+  const [{ isOver }, dropTarget] = useDrop({
     accept: 'ingredients',
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+    }),
     drop(itemId) {
       handleDrop(itemId);
     },
   });
 
   return (
-    <section className={burgerConstructorStyles.burger_constructor} ref={dropTarget}>
+    <section
+      ref={dropTarget}
+      className={burgerConstructorStyles.burger_constructor}
+      style={{ opacity: isOver ? 0.5 : 1 }}
+    >
       { ingredients.length === 0 ? <BurgerConstructorEmptyState /> : (
         <>
           <div className={burgerConstructorStyles.burger_constructor_container}>

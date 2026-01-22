@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import handleEnterOrSpace from '../../utils/handle-enter-or-space';
 import ingredientCardStyles from './ingredient-card.module.css';
 import ingredientPropType from '../../shared/types/ingredient-prop-type';
-import { addIngredient } from '../../services/burger-constructor/burger-constructor.slice';
+import { addIngredientToConstructor } from '../../services/burger-constructor/burger-constructor.slice';
 
 export default function IngredientsCard({ ingredient, onClick }) {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ export default function IngredientsCard({ ingredient, onClick }) {
 
   const handleAddIngredient = (event, item) => {
     event.stopPropagation();
-    dispatch(addIngredient(item));
+    dispatch(addIngredientToConstructor(item));
   };
 
   return (
