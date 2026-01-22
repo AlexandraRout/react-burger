@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import createOrder from './order.thunks';
+import { createOrder } from './order.thunks';
 
 const initialState = {
   orderId: null,

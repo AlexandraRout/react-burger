@@ -5,7 +5,7 @@ import Modal from '../../shared/components/modal/modal';
 import OrderDetails from '../order-details/order-details';
 import useModal from '../../hooks/use-modal';
 import orderSummaryStyles from './order-summary.module.css';
-import createOrder from '../../services/order/order.thunks';
+import { createOrder } from '../../services/order/order.thunks';
 
 export default function OrderSummary() {
   const dispatch = useDispatch();
