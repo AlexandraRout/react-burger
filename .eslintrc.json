@@ -16,7 +16,14 @@
     "react/require-default-props": ["error", {
       "functions": "defaultArguments"
     }],
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": ["state"]
+      }
+    ]
   }
 }
 

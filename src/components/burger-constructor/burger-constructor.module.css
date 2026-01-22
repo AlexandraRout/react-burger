@@ -1,6 +1,7 @@
 .burger_constructor {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .burger_constructor_container {
@@ -14,18 +15,12 @@
 .elements_scroll {
   flex: 1;
   min-height: 0;
+  width: 100%;
   overflow-y: auto;
 
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
-
-.element {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-right: 20px;
 }
 
 .base_element {

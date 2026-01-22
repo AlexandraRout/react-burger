@@ -1,0 +1,15 @@
+.element {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.drag_icon_container {
+  cursor: grab;
+}
+
+.drag_icon_container:active {
+  cursor: grabbing;
+}

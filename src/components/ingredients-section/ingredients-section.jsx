@@ -1,12 +1,12 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import IngredientsCard from '../ingredien-card/ingredien-card';
-import ingredientPropType from '../../shared/types/ingredient-prop-type';
 import ingredientsSectionStyles from './ingredients-section.module.css';
 
-const IngredientsSection = forwardRef(({
-  title, type, ingredients, onClick,
-}, ref) => {
+const IngredientsSection = forwardRef(({ title, type, onClick }, ref) => {
+  const ingredients = useSelector((state) => state.burgerIngredients.items);
+
   const filteredIngredients = ingredients.filter(
     (item) => item.type === type,
   );
@@ -34,7 +34,6 @@ const IngredientsSection = forwardRef(({
 IngredientsSection.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
