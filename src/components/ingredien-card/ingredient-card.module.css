@@ -2,7 +2,11 @@
   display: grid;
   justify-items: center;
   position: relative;
-  cursor: pointer;
+  cursor: grab;
+
+  @media (max-width: 1228px) {
+    cursor: pointer;
+  }
 }
 
 .image {
@@ -20,6 +24,14 @@
   text-align: center;
   line-height: 1.5;
   min-height: calc(1.5em * 2);
+}
+
+.add_button {
+  display: none;
+
+  @media (max-width: 1228px) {
+    display: block;
+  }
 }
 
 

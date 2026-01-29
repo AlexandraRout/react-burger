@@ -5,9 +5,9 @@ import tabsStyles from './tabs.module.css';
 
 export default function Tabs({ current, setCurrent }) {
   const tabs = [
-    { value: 'one', label: 'Булки' },
-    { value: 'two', label: 'Соусы' },
-    { value: 'three', label: 'Начинки' },
+    { value: 'bun', label: 'Булки' },
+    { value: 'sauce', label: 'Соусы' },
+    { value: 'main', label: 'Начинки' },
   ];
 
   return (

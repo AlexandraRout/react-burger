@@ -1,0 +1,11 @@
+.empty_state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+}
+
+.text {
+  max-width: 360px;
+}
