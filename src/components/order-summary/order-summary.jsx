@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Modal from '../../shared/components/modal/modal';
 import OrderDetails from '../order-details/order-details';
 import useModal from '../../hooks/use-modal';
@@ -9,20 +10,26 @@ import { createOrder } from '../../services/order/order.thunks';
 
 export default function OrderSummary() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const ingredients = useSelector((state) => state.burgerConstructor.ingredients);
+  const isAuthChecked = useSelector((state) => state.user.isAuthChecked);
   const { orderId, isLoading, totalPrice } = useSelector((state) => state.order);
   const { isOpen, open, close } = useModal();
 
   const handleCreateOrder = async () => {
     if (isLoading) return;
 
-    const ingredientIds = ingredients.map((ingredient) => ingredient._id);
-    try {
-      await dispatch(createOrder(ingredientIds)).unwrap();
-      open();
-    } catch (err) {
-      console.error(err);
+    if (isAuthChecked) {
+      const ingredientIds = ingredients.map((ingredient) => ingredient._id);
+      try {
+        await dispatch(createOrder(ingredientIds)).unwrap();
+        open();
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      navigate('/login');
     }
   };
 

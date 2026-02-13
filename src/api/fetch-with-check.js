@@ -1,14 +1,18 @@
-const checkResponse = async (response) => {
-  if (!response.ok) {
-    throw new Error(`Ошибка сервера: ${response.status}`);
+export const checkResponse = async (response) => {
+  if (response.ok) {
+    return response.json();
   }
 
-  return response.json();
+  const errorData = await response.json().catch(() => ({}));
+
+  const error = new Error(errorData.message || `Ошибка: ${response.status}`);
+  error.status = response.status;
+  error.data = errorData;
+
+  throw error;
 };
 
-const fetchWithCheck = async (url, options) => {
+export const fetchWithCheck = async (url, options) => {
   const response = await fetch(url, options);
   return checkResponse(response);
 };
-
-export default fetchWithCheck;

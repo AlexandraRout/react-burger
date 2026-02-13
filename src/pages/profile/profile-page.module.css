@@ -1,0 +1,15 @@
+.profile_page {
+  display: flex;
+  gap: 60px;
+  margin-top: 120px;
+}
+
+.nav_bar {
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+}
+
+.exit_button {
+  cursor: pointer;
+}

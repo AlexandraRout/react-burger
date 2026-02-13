@@ -27,31 +27,3 @@
     margin: 0 24px;
   }
 }
-
-.burger_container {
-  flex: 1;
-  min-height: 0;
-
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 40px;
-
-  @media (max-width: 1228px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.burger_constructor {
-  display: flex;
-  min-height: 0;
-
-  @media (max-width: 1228px) {
-    display: none;
-  }
-}
-
-.app_mobile_bar {
-  @media (min-width: 1229px) {
-    display: none;
-  }
-}

@@ -2,11 +2,6 @@
   display: grid;
   justify-items: center;
   position: relative;
-  cursor: grab;
-
-  @media (max-width: 1228px) {
-    cursor: pointer;
-  }
 }
 
 .image {
