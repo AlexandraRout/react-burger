@@ -30,8 +30,12 @@ export default function LoginPage() {
     event.preventDefault();
     if (loading || !validate()) return;
 
-    dispatch(loginUser(form));
-    navigate('/', { replace: true });
+    try {
+      await dispatch(loginUser(form)).unwrap();
+      navigate('/', { replace: true });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleChange = (event) => {

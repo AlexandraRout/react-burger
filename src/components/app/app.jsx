@@ -16,6 +16,7 @@ import ForgotPasswordGuard from '../forgot-password-guard/forgot-password-guard'
 import IngredientDetailsPage from '../../pages/ingredient-details-page/ingredient-details-page';
 import fetchIngredients from '../../services/burger-ingredients/burger-ingredients.thunks';
 import ModalIngredientDetails from '../modal-Ingredient-details/modal-Ingredient-details';
+import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import appStyles from './app.module.css';
 
 export default function App() {
@@ -51,7 +52,8 @@ export default function App() {
 
             <Route path="/forgot-password" element={<ProtectedRouteElement isOnlyUnAuth element={<ForgotPasswordPage />} />} />
             <Route path="/reset-password" element={<ProtectedRouteElement isOnlyUnAuth element={<ForgotPasswordGuard element={<ResetPasswordPage />} />} />} />
-            )
+
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
 
           {background && (

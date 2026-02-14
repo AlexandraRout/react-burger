@@ -24,6 +24,7 @@ export default function IngredientsCard({ ingredient, onClick }) {
 
   const handleAddIngredient = (event, item) => {
     event.stopPropagation();
+    event.preventDefault();
     dispatch(addIngredientToConstructor(item));
   };
 

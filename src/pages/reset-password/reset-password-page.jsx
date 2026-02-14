@@ -6,7 +6,7 @@ import resetPasswordPageStyles from './reset-password-page.module.css';
 
 export default function ResetPasswordPage() {
   const navigate = useNavigate();
-  const initialErrorState = { newPassword: '', token: '' };
+  const initialErrorState = { password: '', token: '' };
 
   const [form, setForm] = useState(initialErrorState);
   const [errors, setErrors] = useState({});
@@ -16,7 +16,7 @@ export default function ResetPasswordPage() {
   const validate = () => {
     const newErrors = {};
 
-    if (!form.newPassword.trim()) newErrors.newPassword = 'Введите новый пароль';
+    if (!form.password.trim()) newErrors.password = 'Введите новый пароль';
     if (!form.token.trim()) newErrors.token = 'Введите токен';
 
     setErrors(newErrors);
@@ -31,7 +31,7 @@ export default function ResetPasswordPage() {
     setIsLoading(true);
 
     passwordResetReset(form).then(() => {
-      navigate('/loading', { replace: true });
+      navigate('/login', { replace: true });
     }).finally(() => setIsLoading(false));
   };
 
@@ -51,10 +51,10 @@ export default function ResetPasswordPage() {
       <form className={resetPasswordPageStyles.reset_password_form} onSubmit={handleSubmit}>
         <PasswordInput
           placeholder="Введите новый пароль"
-          name="newPassword"
-          value={form.newPassword}
-          error={!!errors.newPassword}
-          errorText={errors.newPassword}
+          name="password"
+          value={form.password}
+          error={!!errors.password}
+          errorText={errors.password}
           onChange={handleChange}
         />
         <Input

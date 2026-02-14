@@ -4,17 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import MobileBar from '../../shared/components/mobile-bar/mobile-bar';
 import mobileOrderDetailsStyles from './mobile-order-details.module.css';
 import MobileConstructorElement from '../mobile-constructor-element/mobile-constructor-element';
-import createOrder from '../../services/order/order.thunks';
+import { createOrder } from '../../services/order/order.thunks';
 import DraggleMobileElement
   from '../draggable-mobile-element/draggle-mobile-element';
 import { selectBun, selectFillings } from '../../services/burger-constructor/burger-constructor.selectors';
+import { removeAllIngredientsFromConstructor } from '../../services/burger-constructor/burger-constructor.slice';
 
 export default function MobileOrderDetails({ setIsOrdered }) {
   const dispatch = useDispatch();
 
   const bun = useSelector(selectBun);
   const fillings = useSelector(selectFillings);
-  const ingredients = useSelector((state) => state.burgerConstructor.ingredients);
+  const { ingredients } = useSelector((state) => state.burgerConstructor);
   const { isLoading } = useSelector((state) => state.order);
 
   const handleCreateOrder = async () => {
@@ -24,6 +25,7 @@ export default function MobileOrderDetails({ setIsOrdered }) {
     try {
       await dispatch(createOrder(ingredientIds)).unwrap();
       setIsOrdered(true);
+      dispatch(removeAllIngredientsFromConstructor());
     } catch (err) {
       console.error(err);
     }

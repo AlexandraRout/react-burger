@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import React, { useState, useEffect } from 'react';
+import {
+  Button, EmailInput, Input, PasswordInput,
+} from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '../../services/user/user.thunks';
 import profileOverviewStyles from './profile-overview.module.css';
@@ -9,6 +11,16 @@ export default function ProfileOverview() {
 
   const { user } = useSelector((state) => state.user);
   const [form, setForm] = useState({ name: user.name || '', email: user.email || '', password: '' });
+  const [initialForm, setInitialForm] = useState({ name: user.name || '', email: user.email || '', password: '' });
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [showSaveButton, setShowSaveButton] = useState(false);
+
+  useEffect(() => {
+    const hasChanges = form.name !== initialForm.name
+        || form.email !== initialForm.email || form.password !== initialForm.password;
+
+    setShowSaveButton(hasChanges);
+  }, [form, initialForm]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -16,12 +28,24 @@ export default function ProfileOverview() {
       ...prev,
       [name]: value,
     }));
+  };
 
-    dispatch(updateUser(form));
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+    if (isLoading) return;
+
+    try {
+      dispatch(updateUser(form)).unwrap();
+      setInitialForm({ ...form });
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <form className={profileOverviewStyles.profile_overview}>
+    <form className={profileOverviewStyles.profile_overview} onSubmit={handleSubmit}>
       <Input
         placeholder="Имя"
         name="name"
@@ -47,6 +71,10 @@ export default function ProfileOverview() {
         value={form.password}
         onChange={handleChange}
       />
+
+      {showSaveButton && (
+        <Button htmlType="submit" type="primary" size="medium">{isLoading ? 'Загрузка...' : 'Сохранить'}</Button>
+      )}
     </form>
   );
 }
