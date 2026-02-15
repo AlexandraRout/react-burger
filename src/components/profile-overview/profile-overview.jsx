@@ -10,16 +10,26 @@ export default function ProfileOverview() {
   const dispatch = useDispatch();
 
   const { user, isLoading } = useSelector((state) => state.user);
-  const [form, setForm] = useState({ name: user.name || '', email: user.email || '', password: '' });
-  const [initialForm, setInitialForm] = useState({ name: user.name || '', email: user.email || '', password: '' });
+  const [form, setForm] = useState({ name: '', email: '', password: '' });
   const [showSaveButton, setShowSaveButton] = useState(false);
 
   useEffect(() => {
-    const hasChanges = form.name !== initialForm.name
-        || form.email !== initialForm.email || form.password !== initialForm.password;
+    if (user) {
+      setForm({
+        name: user.name || '',
+        email: user.email || '',
+        password: '',
+      });
+    }
+  }, [user]);
 
+  useEffect(() => {
+    let hasChanges = false;
+    if (user) {
+      hasChanges = form.name !== user.name || form.email !== user.email || form.password !== '';
+    }
     setShowSaveButton(hasChanges);
-  }, [form, initialForm]);
+  }, [form, user]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -35,7 +45,6 @@ export default function ProfileOverview() {
 
     try {
       await dispatch(updateUser(form)).unwrap();
-      setInitialForm({ ...form });
     } catch (err) {
       console.log(err);
     }
