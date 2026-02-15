@@ -49,49 +49,50 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className={registerPageStyles.register_page}>
-      <h1 className="text text text_type_main-medium">Регистрация</h1>
+    <div className={registerPageStyles.register_page_container}>
+      <div className={registerPageStyles.register_page}>
+        <h1 className="text text text_type_main-medium">Регистрация</h1>
 
-      <form className={registerPageStyles.register_page_form} onSubmit={handleSubmit}>
-        <Input
-          placeholder="Имя"
-          name="name"
-          value={form.name}
-          error={!!errors.name}
-          errorText={errors.name}
-          onChange={handleChange}
-        />
+        <form className={registerPageStyles.register_page_form} onSubmit={handleSubmit}>
+          <Input
+            placeholder="Имя"
+            name="name"
+            value={form.name}
+            error={!!errors.name}
+            errorText={errors.name}
+            onChange={handleChange}
+          />
 
-        <EmailInput
-          placeholder="E-mail"
-          name="email"
-          value={form.email}
-          error={!!errors.email}
-          errorText={errors.email}
-          onChange={handleChange}
-        />
+          <EmailInput
+            placeholder="E-mail"
+            name="email"
+            value={form.email}
+            error={!!errors.email}
+            errorText={errors.email}
+            onChange={handleChange}
+          />
 
-        <PasswordInput
-          placeholder="Пароль"
-          name="password"
-          value={form.password}
-          error={!!errors.password}
-          errorText={errors.password}
-          onChange={handleChange}
-        />
-        <Button htmlType="submit" type="primary" size="medium">{loading ? 'Загрузка...' : 'Зарегистрироваться'}</Button>
-      </form>
+          <PasswordInput
+            placeholder="Пароль"
+            name="password"
+            value={form.password}
+            error={!!errors.password}
+            errorText={errors.password}
+            onChange={handleChange}
+          />
+          <Button htmlType="submit" type="primary" size="medium">{loading ? 'Загрузка...' : 'Зарегистрироваться'}</Button>
+        </form>
 
-      <div className="mt-20">
-        <span className="text text_type_main-default text_color_inactive">
-          Уже зарегистрированы?
-        </span>
+        <div className="mt-20">
+          <span className="text text_type_main-default text_color_inactive">
+            Уже зарегистрированы?
+          </span>
 
-        <Link to="/login" className="ml-2 text text_type_main-default text_color_accent">
-          Войти
-        </Link>
+          <Link to="/login" className="ml-2 text text_type_main-default text_color_accent">
+            Войти
+          </Link>
+        </div>
       </div>
-
     </div>
   );
 }

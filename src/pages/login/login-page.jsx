@@ -48,47 +48,49 @@ export default function LoginPage() {
   };
 
   return (
-    <div className={loginPageStyles.login_page}>
-      <h1 className="text text text_type_main-medium">Вход</h1>
+    <div className={loginPageStyles.login_page_container}>
+      <div className={loginPageStyles.login_page}>
+        <h1 className="text text text_type_main-medium">Вход</h1>
 
-      <form className={loginPageStyles.login_page_form} onSubmit={handleSubmit}>
-        <EmailInput
-          placeholder="E-mail"
-          name="email"
-          value={form.email}
-          error={!!errors.email}
-          errorText={errors.email}
-          onChange={handleChange}
-        />
+        <form className={loginPageStyles.login_page_form} onSubmit={handleSubmit}>
+          <EmailInput
+            placeholder="E-mail"
+            name="email"
+            value={form.email}
+            error={!!errors.email}
+            errorText={errors.email}
+            onChange={handleChange}
+          />
 
-        <PasswordInput
-          placeholder="Пароль"
-          name="password"
-          value={form.password}
-          error={!!errors.password}
-          errorText={errors.password}
-          onChange={handleChange}
-        />
+          <PasswordInput
+            placeholder="Пароль"
+            name="password"
+            value={form.password}
+            error={!!errors.password}
+            errorText={errors.password}
+            onChange={handleChange}
+          />
 
-        <Button htmlType="submit" type="primary" size="medium">{loading ? 'Загрузка...' : 'Войти'}</Button>
-      </form>
+          <Button htmlType="submit" type="primary" size="medium">{loading ? 'Загрузка...' : 'Войти'}</Button>
+        </form>
 
-      <div className="mt-20">
-        <span className="text text_type_main-default text_color_inactive">
-          Вы — новый пользователь?
-        </span>
-        <Link to="/register" className="ml-2 text text_type_main-default text_color_accent">
-          Зарегистрироваться
-        </Link>
-      </div>
+        <div className="mt-20">
+          <span className="text text_type_main-default text_color_inactive">
+            Вы — новый пользователь?
+          </span>
+          <Link to="/register" className="ml-2 text text_type_main-default text_color_accent">
+            Зарегистрироваться
+          </Link>
+        </div>
 
-      <div className="mt-4">
-        <span className="text text_type_main-default text_color_inactive">
-          Забыли пароль?
-        </span>
-        <Link to="/forgot-password" className="ml-2 text text_type_main-default text_color_accent">
-          Восстановить пароль
-        </Link>
+        <div className="mt-4">
+          <span className="text text_type_main-default text_color_inactive">
+            Забыли пароль?
+          </span>
+          <Link to="/forgot-password" className="ml-2 text text_type_main-default text_color_accent">
+            Восстановить пароль
+          </Link>
+        </div>
       </div>
     </div>
   );

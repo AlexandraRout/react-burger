@@ -42,30 +42,35 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className={forgotPasswordPageStyles.forgot_password_page}>
-      <h1 className="text text text_type_main-medium">Восстановление пароля</h1>
+    <div className={forgotPasswordPageStyles.forgot_password_page_container}>
+      <div className={forgotPasswordPageStyles.forgot_password_page}>
+        <h1 className="text text text_type_main-medium">Восстановление пароля</h1>
 
-      <form className={forgotPasswordPageStyles.forgot_password_page_form} onSubmit={handleSubmit}>
-        <EmailInput
-          placeholder="E-mail"
-          name="email"
-          value={form.email}
-          error={!!errors.email}
-          errorText={errors.email}
-          onChange={handleChange}
-        />
+        <form
+          className={forgotPasswordPageStyles.forgot_password_page_form}
+          onSubmit={handleSubmit}
+        >
+          <EmailInput
+            placeholder="E-mail"
+            name="email"
+            value={form.email}
+            error={!!errors.email}
+            errorText={errors.email}
+            onChange={handleChange}
+          />
 
-        <Button htmlType="submit" type="primary" size="medium">{isLoading ? 'Загрузка...' : 'Восстановить'}</Button>
-      </form>
+          <Button htmlType="submit" type="primary" size="medium">{isLoading ? 'Загрузка...' : 'Восстановить'}</Button>
+        </form>
 
-      <div className="mt-20">
-        <span className="text text_type_main-default text_color_inactive">
-          Вспомнили пароль?
-        </span>
+        <div className="mt-20">
+          <span className="text text_type_main-default text_color_inactive">
+            Вспомнили пароль?
+          </span>
 
-        <Link to="/login" className="ml-2 text text_type_main-default text_color_accent">
-          Войти
-        </Link>
+          <Link to="/login" className="ml-2 text text_type_main-default text_color_accent">
+            Войти
+          </Link>
+        </div>
       </div>
     </div>
   );

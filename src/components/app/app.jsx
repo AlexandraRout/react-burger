@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import AppHeader from '../app-header/app-header';
 import BurgerConstructorPage from '../../pages/burger-constructor/burger-constructor-page';
 import LoginPage from '../../pages/login/login-page';
 import RegisterPage from '../../pages/register/register-page';
@@ -17,11 +16,12 @@ import IngredientDetailsPage from '../../pages/ingredient-details-page/ingredien
 import fetchIngredients from '../../services/burger-ingredients/burger-ingredients.thunks';
 import ModalIngredientDetails from '../modal-Ingredient-details/modal-Ingredient-details';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import appStyles from './app.module.css';
+import MainLayout from '../main-layout/main-layout';
+import SimpleLayout from '../simple-layout/simple-layout';
+import FullScreenLoader from '../full-screen-loader/full-screen-loader';
 
 export default function App() {
   const dispatch = useDispatch();
-
   const location = useLocation();
   const background = location.state && location.state.background;
   const { checkAuth, isLoading } = useAuth();
@@ -31,38 +31,57 @@ export default function App() {
     checkAuth();
   }, [dispatch]);
 
-  if (isLoading) return <div>Загрузка...</div>;
+  if (isLoading) return <FullScreenLoader />;
 
   return (
-    <div className={appStyles.app_container}>
-      <AppHeader />
-      <main className={appStyles.app_content}>
-        <div className={appStyles.app_content_container}>
-          <Routes location={background || location}>
-            <Route path="/" element={<BurgerConstructorPage />} />
-            <Route path="/ingredients/:id" element={<IngredientDetailsPage />} />
+    <>
+      <Routes location={background || location}>
+        {/* Layout с нижним баром */}
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<BurgerConstructorPage />} />
+          <Route path="/ingredients/:id" element={<IngredientDetailsPage />} />
+        </Route>
 
-            <Route path="/login" element={<ProtectedRouteElement isOnlyUnAuth element={<LoginPage />} />} />
-            <Route path="/register" element={<ProtectedRouteElement isOnlyUnAuth element={<RegisterPage />} />} />
+        {/* Layout без нижнего бара */}
+        <Route element={<SimpleLayout />}>
+          <Route
+            path="/profile"
+            element={<ProtectedRouteElement element={<ProfilePage />} />}
+          >
+            <Route index element={<ProfileOverview />} />
+            <Route path="orders" element={<OrdersHistory />} />
+          </Route>
 
-            <Route path="/profile" element={<ProtectedRouteElement element={<ProfilePage />} />}>
-              <Route index element={<ProfileOverview />} />
-              <Route path="orders" element={<OrdersHistory />} />
-            </Route>
+          <Route
+            path="/login"
+            element={<ProtectedRouteElement isOnlyUnAuth element={<LoginPage />} />}
+          />
+          <Route
+            path="/register"
+            element={<ProtectedRouteElement isOnlyUnAuth element={<RegisterPage />} />}
+          />
+          <Route
+            path="/forgot-password"
+            element={<ProtectedRouteElement isOnlyUnAuth element={<ForgotPasswordPage />} />}
+          />
+          <Route
+            path="/reset-password"
+            element={(
+              <ProtectedRouteElement
+                isOnlyUnAuth
+                element={<ForgotPasswordGuard element={<ResetPasswordPage />} />}
+              />
+            )}
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
 
-            <Route path="/forgot-password" element={<ProtectedRouteElement isOnlyUnAuth element={<ForgotPasswordPage />} />} />
-            <Route path="/reset-password" element={<ProtectedRouteElement isOnlyUnAuth element={<ForgotPasswordGuard element={<ResetPasswordPage />} />} />} />
-
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-
-          {background && (
-            <Routes>
-              <Route path="/ingredients/:id" element={(<ModalIngredientDetails />)} />
-            </Routes>
-          )}
-        </div>
-      </main>
-    </div>
+      {background && (
+        <Routes>
+          <Route path="/ingredients/:id" element={<ModalIngredientDetails />} />
+        </Routes>
+      )}
+    </>
   );
 }

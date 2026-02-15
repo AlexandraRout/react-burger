@@ -45,37 +45,39 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <div className={resetPasswordPageStyles.reset_password_page}>
-      <h1 className="text text text_type_main-medium">Восстановление пароля</h1>
+    <div className={resetPasswordPageStyles.reset_password_page_container}>
+      <div className={resetPasswordPageStyles.reset_password_page}>
+        <h1 className="text text text_type_main-medium">Восстановление пароля</h1>
 
-      <form className={resetPasswordPageStyles.reset_password_form} onSubmit={handleSubmit}>
-        <PasswordInput
-          placeholder="Введите новый пароль"
-          name="password"
-          value={form.password}
-          error={!!errors.password}
-          errorText={errors.password}
-          onChange={handleChange}
-        />
-        <Input
-          placeholder="Введите код из письма"
-          name="token"
-          value={form.token}
-          error={!!errors.token}
-          errorText={errors.token}
-          onChange={handleChange}
-        />
+        <form className={resetPasswordPageStyles.reset_password_form} onSubmit={handleSubmit}>
+          <PasswordInput
+            placeholder="Введите новый пароль"
+            name="password"
+            value={form.password}
+            error={!!errors.password}
+            errorText={errors.password}
+            onChange={handleChange}
+          />
+          <Input
+            placeholder="Введите код из письма"
+            name="token"
+            value={form.token}
+            error={!!errors.token}
+            errorText={errors.token}
+            onChange={handleChange}
+          />
 
-        <Button htmlType="submit" type="primary" size="medium">{isLoading ? 'Загрузка...' : 'Сохранить'}</Button>
-      </form>
+          <Button htmlType="submit" type="primary" size="medium">{isLoading ? 'Загрузка...' : 'Сохранить'}</Button>
+        </form>
 
-      <div className="mt-20">
-        <span className="text text_type_main-default text_color_inactive">
-          Вспомнили пароль?
-        </span>
-        <Link to="/login" className="ml-2 text text_type_main-default text_color_accent">
-          Войти
-        </Link>
+        <div className="mt-20">
+          <span className="text text_type_main-default text_color_inactive">
+            Вспомнили пароль?
+          </span>
+          <Link to="/login" className="ml-2 text text_type_main-default text_color_accent">
+            Войти
+          </Link>
+        </div>
       </div>
     </div>
   );
