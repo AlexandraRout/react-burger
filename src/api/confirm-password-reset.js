@@ -1,16 +1,15 @@
 import BASE_URL from './base-url-api';
-import { fetchWithCheck } from './fetch-with-check';
+import fetchWithCheck from './fetch-with-check';
 
 const url = `${BASE_URL}/password-reset/reset`;
 
 const confirmPasswordReset = async (options) => {
   try {
-    const data = await fetchWithCheck(url, {
+    await fetchWithCheck(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(options),
     });
-    return data.data;
   } catch (error) {
     throw new Error('Ошибка отправки запроса, пожалуйста повторите попытку');
   }

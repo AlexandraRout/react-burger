@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchWithCheck } from '../../api/fetch-with-check';
+import fetchWithCheck from '../../api/fetch-with-check';
 import BASE_URL from '../../api/base-url-api';
 import { deleteCookie, getCookie, setCookie } from '../../utils/cookies';
 import fetchWithRefresh from '../../api/fetch-with-refresh';

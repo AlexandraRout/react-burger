@@ -1,6 +1,6 @@
 import refreshToken from './refresh-token';
 import { setCookie } from '../utils/cookies';
-import { checkResponse } from './fetch-with-check';
+import fetchWithCheck from './fetch-with-check';
 
 const isAuthError = (error) => error.status === 401 || error.message === 'jwt expired';
 
@@ -22,14 +22,12 @@ const handleTokenRefresh = async (url, options) => {
     },
   };
 
-  const retryResponse = await fetch(url, retryOptions);
-  return checkResponse(retryResponse);
+  return fetchWithCheck(url, retryOptions);
 };
 
 const fetchWithRefresh = async (url, options = {}) => {
   try {
-    const response = await fetch(url, options);
-    return await checkResponse(response);
+    return await fetchWithCheck(url, options);
   } catch (error) {
     if (!isAuthError(error)) {
       throw error;

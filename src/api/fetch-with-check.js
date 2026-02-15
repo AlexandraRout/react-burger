@@ -1,4 +1,4 @@
-export const checkResponse = async (response) => {
+const checkResponse = async (response) => {
   if (response.ok) {
     return response.json();
   }
@@ -12,7 +12,9 @@ export const checkResponse = async (response) => {
   throw error;
 };
 
-export const fetchWithCheck = async (url, options) => {
+const fetchWithCheck = async (url, options) => {
   const response = await fetch(url, options);
   return checkResponse(response);
 };
+
+export default fetchWithCheck;
