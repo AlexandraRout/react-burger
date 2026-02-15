@@ -1,7 +1,14 @@
 export function setCookie(name, value, options = {}) {
-  const props = { ...options };
+  let props = {};
+
+  if (typeof options === 'number') {
+    props.expires = options * 60;
+  } else {
+    props = { ...options };
+  }
 
   let exp = props.expires;
+
   if (typeof exp === 'number' && exp) {
     const expiresAt = new Date();
     expiresAt.setTime(expiresAt.getTime() + exp * 1000);
