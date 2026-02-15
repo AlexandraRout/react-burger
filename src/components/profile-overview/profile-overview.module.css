@@ -6,6 +6,7 @@
   padding-bottom: 60px;
 }
 
-.profile_overview_save_button {
-  max-width: 480px;
+.profile_overview_buttons {
+  display: flex;
+  gap: 16px;
 }

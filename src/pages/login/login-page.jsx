@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import loginPageStyles from './login-page.module.css';
 import { loginUser } from '../../services/user/user.thunks';
@@ -8,6 +8,9 @@ import { loginUser } from '../../services/user/user.thunks';
 export default function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state.from.pathname || '/';
 
   const initialErrorState = { email: '', password: '' };
 
@@ -32,7 +35,7 @@ export default function LoginPage() {
 
     try {
       await dispatch(loginUser(form)).unwrap();
-      navigate('/', { replace: true });
+      navigate(from, { replace: true });
     } catch (error) {
       console.log(error);
     }

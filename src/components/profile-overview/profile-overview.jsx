@@ -50,6 +50,14 @@ export default function ProfileOverview() {
     }
   };
 
+  const handleReset = () => {
+    setForm({
+      name: user.name || '',
+      email: user.email || '',
+      password: '',
+    });
+  };
+
   return (
     <form className={profileOverviewStyles.profile_overview} onSubmit={handleSubmit}>
       <Input
@@ -79,14 +87,24 @@ export default function ProfileOverview() {
       />
 
       {showSaveButton && (
+      <div className={profileOverviewStyles.profile_overview_buttons}>
         <Button
           htmlType="submit"
           type="primary"
           size="medium"
-          extraClass={profileOverviewStyles.profile_overview_save_button}
         >
           {isLoading ? 'Загрузка...' : 'Сохранить'}
         </Button>
+
+        <Button
+          htmlType="button"
+          type="secondary"
+          size="medium"
+          onClick={handleReset}
+        >
+          Отмена
+        </Button>
+      </div>
       )}
     </form>
   );
