@@ -11,8 +11,8 @@ export default function OrderSummary({ onOrderCreated }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const ingredients = useSelector((state) => state.burgerConstructor.ingredients);
-  const isAuthChecked = useSelector((state) => state.user.isAuthChecked);
+  const { ingredients } = useSelector((state) => state.burgerConstructor);
+  const { isAuthChecked } = useSelector((state) => state.user);
   const { isLoading, totalPrice } = useSelector((state) => state.order);
 
   const handleCreateOrder = async () => {

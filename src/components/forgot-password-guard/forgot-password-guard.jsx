@@ -6,10 +6,10 @@ import PropTypes from 'prop-types';
 export default function ForgotPasswordGuard({ element }) {
   const forgotPasswordStep = useSelector((state) => state.user.forgotPasswordStep);
 
-  if (!forgotPasswordStep) {
-    return <Navigate to="/login" replace />;
+  if (forgotPasswordStep) {
+    return element;
   }
-  return element;
+  return <Navigate to="/login" replace />;
 }
 
 ForgotPasswordGuard.propTypes = {

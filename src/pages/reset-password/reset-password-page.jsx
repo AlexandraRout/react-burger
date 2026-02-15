@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate } from 'react-router-dom';
-import passwordResetReset from '../../services/api/reset-api';
+import confirmPasswordReset from '../../api/confirm-password-reset';
 import resetPasswordPageStyles from './reset-password-page.module.css';
 
 export default function ResetPasswordPage() {
@@ -30,9 +30,12 @@ export default function ResetPasswordPage() {
 
     setIsLoading(true);
 
-    passwordResetReset(form).then(() => {
-      navigate('/login', { replace: true });
-    }).finally(() => setIsLoading(false));
+    confirmPasswordReset(form)
+      .then(() => { navigate('/login', { replace: true }); })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const handleChange = (event) => {

@@ -1,9 +1,9 @@
-import BASE_URL from '../../api/base-url-api';
-import { fetchWithCheck } from '../../api/fetch-with-check';
+import BASE_URL from './base-url-api';
+import { fetchWithCheck } from './fetch-with-check';
 
 const url = `${BASE_URL}/password-reset/reset`;
 
-const passwordResetReset = async (options) => {
+const confirmPasswordReset = async (options) => {
   try {
     const data = await fetchWithCheck(url, {
       method: 'POST',
@@ -16,4 +16,4 @@ const passwordResetReset = async (options) => {
   }
 };
 
-export default passwordResetReset;
+export default confirmPasswordReset;

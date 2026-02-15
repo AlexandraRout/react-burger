@@ -9,10 +9,9 @@ import profileOverviewStyles from './profile-overview.module.css';
 export default function ProfileOverview() {
   const dispatch = useDispatch();
 
-  const { user } = useSelector((state) => state.user);
+  const { user, isLoading } = useSelector((state) => state.user);
   const [form, setForm] = useState({ name: user.name || '', email: user.email || '', password: '' });
   const [initialForm, setInitialForm] = useState({ name: user.name || '', email: user.email || '', password: '' });
-  const [isLoading, setIsLoading] = React.useState(false);
   const [showSaveButton, setShowSaveButton] = useState(false);
 
   useEffect(() => {
@@ -30,17 +29,15 @@ export default function ProfileOverview() {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setIsLoading(true);
     if (isLoading) return;
 
     try {
-      dispatch(updateUser(form)).unwrap();
+      await dispatch(updateUser(form)).unwrap();
       setInitialForm({ ...form });
-      setIsLoading(false);
     } catch (err) {
-      setIsLoading(false);
+      console.log(err);
     }
   };
 
@@ -73,7 +70,14 @@ export default function ProfileOverview() {
       />
 
       {showSaveButton && (
-        <Button htmlType="submit" type="primary" size="medium">{isLoading ? 'Загрузка...' : 'Сохранить'}</Button>
+        <Button
+          htmlType="submit"
+          type="primary"
+          size="medium"
+          extraClass={profileOverviewStyles.profile_overview_save_button}
+        >
+          {isLoading ? 'Загрузка...' : 'Сохранить'}
+        </Button>
       )}
     </form>
   );

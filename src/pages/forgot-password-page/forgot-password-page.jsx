@@ -38,7 +38,12 @@ export default function ForgotPasswordPage() {
     setIsLoading(true);
 
     dispatch(resetPasswordUser(form))
-      .unwrap().then(() => { navigate('/reset-password'); }).finally(() => setIsLoading(false));
+      .unwrap()
+      .then(() => { navigate('/reset-password'); })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (

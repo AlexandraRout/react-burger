@@ -1,6 +1,11 @@
 .profile_overview {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: 100%;
+  padding-bottom: 60px;
+}
+
+.profile_overview_save_button {
+  max-width: 480px;
 }
