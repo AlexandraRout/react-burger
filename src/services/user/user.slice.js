@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  registerUser, loginUser, logoutUser, fetchUser, resetPasswordUser, updateUser,
+  registerUser,
+  loginUser, logoutUser, fetchUser, resetPasswordUser, updateUser, confirmPasswordReset,
 } from './user.thunks';
 import { deleteCookie, getCookie, setCookie } from '../../utils/cookies';
 
@@ -27,6 +28,7 @@ const userSlice = createSlice({
       .addCase(registerUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload;
+        state.isAuthChecked = true;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -89,6 +91,11 @@ const userSlice = createSlice({
       .addCase(resetPasswordUser.fulfilled, (state) => {
         state.forgotPasswordStep = true;
         setCookie('forgotPasswordStep', 'true', 20);
+      })
+    // Подтверждение смены пароля
+      .addCase(confirmPasswordReset.fulfilled, (state) => {
+        state.forgotPasswordStep = false;
+        deleteCookie('forgotPasswordStep');
       });
   },
 });

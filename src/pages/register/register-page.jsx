@@ -40,12 +40,16 @@ export default function RegisterPage() {
     setErrors(initialErrorState);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (loading || !validate()) return;
 
-    dispatch(registerUser(form)).unwrap();
-    navigate('/profile', { replace: true });
+    try {
+      await dispatch(registerUser(form)).unwrap();
+      navigate('/profile', { replace: true });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

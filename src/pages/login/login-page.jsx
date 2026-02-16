@@ -10,7 +10,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = location.state.from.pathname || '/';
+  const from = (location.state && location.state.from && location.state.from.pathname) || '/';
 
   const initialErrorState = { email: '', password: '' };
 

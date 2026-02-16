@@ -26,5 +26,5 @@ export default function ModalIngredientDetails() {
 
   if (!ingredients.length) return <div>Загрузка...</div>;
 
-  return (<Modal isOpen onClose={onCloseIngredient}><IngredientDetails /></Modal>);
+  return (<Modal title="Детали ингредиента" isOpen onClose={onCloseIngredient}><IngredientDetails /></Modal>);
 }

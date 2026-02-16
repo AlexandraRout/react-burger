@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate } from 'react-router-dom';
-import confirmPasswordReset from '../../api/confirm-password-reset';
+import { useDispatch } from 'react-redux';
 import resetPasswordPageStyles from './reset-password-page.module.css';
+import { confirmPasswordReset } from '../../services/user/user.thunks';
 
 export default function ResetPasswordPage() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const initialErrorState = { password: '', token: '' };
 
@@ -24,13 +26,14 @@ export default function ResetPasswordPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (isLoading || !validate()) return;
 
     setIsLoading(true);
 
-    confirmPasswordReset(form)
+    dispatch(confirmPasswordReset(form))
+      .unwrap()
       .then(() => { navigate('/login', { replace: true }); })
       .catch((error) => {
         console.error(error);

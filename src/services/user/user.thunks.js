@@ -122,3 +122,19 @@ export const resetPasswordUser = createAsyncThunk(
     }
   },
 );
+
+// Подтверждение смены пароля
+export const confirmPasswordReset = createAsyncThunk(
+  'user/confirmPasswordReset',
+  async (options, { rejectWithValue }) => {
+    try {
+      return await fetchWithCheck(`${BASE_URL}/password-reset/reset`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(options),
+      });
+    } catch (error) {
+      return rejectWithValue(error.message || 'Ошибка отправки запроса, пожалуйста повторите попытку');
+    }
+  },
+);
