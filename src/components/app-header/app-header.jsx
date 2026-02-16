@@ -2,7 +2,8 @@ import React from 'react';
 import {
   Logo, ProfileIcon, BurgerIcon, ListIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import NavLink from '../../shared/components/link/nav-link';
+import { Link } from 'react-router-dom';
+import HeaderNavLink from '../header-nav-link/header-nav-link';
 import appHeaderStyles from './app-header.module.css';
 
 export default function AppHeader() {
@@ -10,24 +11,24 @@ export default function AppHeader() {
     <header className={appHeaderStyles.app_header}>
       <div className={appHeaderStyles.app_header_container}>
         <nav className={appHeaderStyles.nav_left}>
-          <NavLink
+          <HeaderNavLink
             to="/"
-            icon={<BurgerIcon type="secondary" />}
+            icon={BurgerIcon}
             text="Конструктор"
           />
-          <NavLink
+          <HeaderNavLink
             to="/feed"
-            icon={<ListIcon type="secondary" />}
+            icon={ListIcon}
             text="Лента заказов"
           />
         </nav>
 
-        <Logo className={appHeaderStyles.logo} />
+        <Link to="/"><Logo className={appHeaderStyles.logo} /></Link>
 
         <nav className={appHeaderStyles.nav_right}>
-          <NavLink
+          <HeaderNavLink
             to="/profile"
-            icon={<ProfileIcon type="secondary" />}
+            icon={ProfileIcon}
             text="Личный кабинет"
           />
         </nav>

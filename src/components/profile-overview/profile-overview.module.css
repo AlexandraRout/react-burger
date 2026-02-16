@@ -1,0 +1,12 @@
+.profile_overview {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: 100%;
+  padding-bottom: 60px;
+}
+
+.profile_overview_buttons {
+  display: flex;
+  gap: 16px;
+}

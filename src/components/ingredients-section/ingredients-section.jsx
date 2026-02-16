@@ -1,10 +1,13 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
 import IngredientsCard from '../ingredien-card/ingredien-card';
 import ingredientsSectionStyles from './ingredients-section.module.css';
 
 const IngredientsSection = forwardRef(({ title, type, onClick }, ref) => {
+  const location = useLocation();
+
   const ingredients = useSelector((state) => state.burgerIngredients.items);
 
   const filteredIngredients = ingredients.filter(
@@ -23,7 +26,12 @@ const IngredientsSection = forwardRef(({ title, type, onClick }, ref) => {
       <ul className={ingredientsSectionStyles.list}>
         {filteredIngredients.map((ingredient) => (
           <li key={ingredient._id}>
-            <IngredientsCard ingredient={ingredient} onClick={onClick} />
+            <Link
+              to={`/ingredients/${ingredient._id}`}
+              state={{ background: location }}
+            >
+              <IngredientsCard ingredient={ingredient} onClick={onClick} />
+            </Link>
           </li>
         ))}
       </ul>

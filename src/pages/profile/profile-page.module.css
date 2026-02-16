@@ -1,0 +1,22 @@
+.profile_page {
+  display: flex;
+  gap: 60px;
+  margin-top: 120px;
+  height: 100%;
+  overflow: scroll;
+
+  @media (max-width: 796px) {
+    flex-direction: column;
+    margin-top: 20px;
+  }
+}
+
+.nav_bar {
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+}
+
+.exit_button {
+  cursor: pointer;
+}

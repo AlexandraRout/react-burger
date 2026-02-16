@@ -1,17 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Tabs from '../tabs/tabs';
 import IngredientsSection from '../ingredients-section/ingredients-section';
 import burgerIngredientsStyles from './burger-ingredients.module.css';
 import scrollToElement from '../../utils/scroll-to-element';
-import Modal from '../../shared/components/modal/modal';
-import IngredientDetails from '../ingredient-details/ingredient-details';
-import useModal from '../../hooks/use-modal';
-import {
-  clearCurrentIngredient,
-  setCurrentIngredient,
-} from '../../services/current-ingredient/current-ingredient.slice';
-import fetchIngredients from '../../services/burger-ingredients/burger-ingredients.thunks';
+import { setCurrentIngredient } from '../../services/current-ingredient/current-ingredient.slice';
 import useScrollTabsCallback from '../../hooks/use-scroll-tabs-callback';
 
 export default function BurgerIngredients() {
@@ -25,7 +18,6 @@ export default function BurgerIngredients() {
   };
 
   const [currentTab, setCurrentTab] = useState('bun');
-  const { isOpen, open, close } = useModal();
 
   const { items: ingredients, isLoading, error } = useSelector((state) => state.burgerIngredients);
 
@@ -36,12 +28,6 @@ export default function BurgerIngredients() {
 
   const onClickIngredient = (ingredient) => {
     dispatch(setCurrentIngredient(ingredient));
-    open();
-  };
-
-  const onCloseIngredient = () => {
-    dispatch(clearCurrentIngredient());
-    close();
   };
 
   const onScroll = useScrollTabsCallback({
@@ -49,10 +35,6 @@ export default function BurgerIngredients() {
     sections,
     onChange: setCurrentTab,
   });
-
-  useEffect(() => {
-    dispatch(fetchIngredients());
-  }, [dispatch]);
 
   return (
     <>
@@ -75,7 +57,6 @@ export default function BurgerIngredients() {
           </div>
         </section>
       ) : null}
-      {isOpen && <Modal isOpen={isOpen} title="Детали ингредиента" onClose={onCloseIngredient}><IngredientDetails /></Modal>}
     </>
   );
 }
