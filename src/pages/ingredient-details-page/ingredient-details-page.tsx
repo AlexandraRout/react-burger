@@ -13,7 +13,9 @@ export default function IngredientDetailsPage() {
   const ingredient = ingredients.find((item) => item._id === id);
 
   useEffect(() => {
-    dispatch(setCurrentIngredient(ingredient));
+    if (ingredient) {
+      dispatch(setCurrentIngredient(ingredient));
+    }
   }, [dispatch, ingredient]);
 
   if (!ingredients.length) return <div>Загрузка...</div>;

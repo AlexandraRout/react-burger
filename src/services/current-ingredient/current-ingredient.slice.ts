@@ -9,8 +9,8 @@ const currentIngredientSlice = createSlice({
   name: 'currentIngredient',
   initialState,
   reducers: {
-    setCurrentIngredient(state, action: PayloadAction<IIngredient | undefined>) {
-      state.ingredient = action.payload ?? null;
+    setCurrentIngredient(state, action: PayloadAction<IIngredient>) {
+      state.ingredient = action.payload;
     },
     clearCurrentIngredient(state) {
       state.ingredient = null;

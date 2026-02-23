@@ -16,7 +16,9 @@ export default function ModalIngredientDetails() {
   const ingredient = ingredients.find((item) => item._id === id);
 
   useEffect(() => {
-    dispatch(setCurrentIngredient(ingredient));
+    if (ingredient) {
+      dispatch(setCurrentIngredient(ingredient));
+    }
   }, [dispatch, ingredient]);
 
   const onCloseIngredient = () => {
