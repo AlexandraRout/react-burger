@@ -5,7 +5,7 @@ import { IIngredient, IIngredientsApiResponse } from '../../types';
 
 const url = `${BASE_URL}/ingredients`;
 
-const fetchIngredients = createAsyncThunk<IIngredient[], void>(
+const fetchIngredients = createAsyncThunk<IIngredient[], void, { rejectValue: string }>(
   'burger-ingredients/fetchAll',
   async (_, { rejectWithValue }) => {
     try {

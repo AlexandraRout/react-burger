@@ -31,7 +31,7 @@ interface IUserResponse {
 }
 
 // Регистрация
-export const registerUser = createAsyncThunk<IUser, IRegisterForm>(
+export const registerUser = createAsyncThunk<IUser, IRegisterForm, { rejectValue: string }>(
   'user/register',
   async (formData, { rejectWithValue }) => {
     try {
@@ -51,7 +51,7 @@ export const registerUser = createAsyncThunk<IUser, IRegisterForm>(
 );
 
 // Авторизация (Логин)
-export const loginUser = createAsyncThunk<IUser, ILoginForm>(
+export const loginUser = createAsyncThunk<IUser, ILoginForm, { rejectValue: string }>(
   'user/login',
   async (formData, { rejectWithValue }) => {
     try {
@@ -71,7 +71,7 @@ export const loginUser = createAsyncThunk<IUser, ILoginForm>(
 );
 
 // Получение текущего пользователя
-export const fetchUser = createAsyncThunk<IUser, void>(
+export const fetchUser = createAsyncThunk<IUser, void, { rejectValue: string }>(
   'user/fetchUser',
   async (_, { rejectWithValue }) => {
     try {
@@ -91,7 +91,7 @@ export const fetchUser = createAsyncThunk<IUser, void>(
 );
 
 // Обновление данных пользователя
-export const updateUser = createAsyncThunk<IUser, Partial<IRegisterForm>>(
+export const updateUser = createAsyncThunk<IUser, Partial<IRegisterForm>, { rejectValue: string }>(
   'user/updateUser',
   async (userData, { rejectWithValue }) => {
     try {
@@ -114,7 +114,7 @@ export const updateUser = createAsyncThunk<IUser, Partial<IRegisterForm>>(
 );
 
 // Выход из системы
-export const logoutUser = createAsyncThunk<void, void>(
+export const logoutUser = createAsyncThunk<void, void, { rejectValue: string }>(
   'user/logout',
   async (_, { rejectWithValue }) => {
     try {
@@ -134,7 +134,7 @@ export const logoutUser = createAsyncThunk<void, void>(
 );
 
 // Смена пароля
-export const resetPasswordUser = createAsyncThunk<{ success: boolean }, IResetPasswordForm>(
+export const resetPasswordUser = createAsyncThunk<{ success: boolean }, IResetPasswordForm, { rejectValue: string }>(
   'user/resetPassword',
   async (options, { rejectWithValue }) => {
     try {
@@ -150,7 +150,7 @@ export const resetPasswordUser = createAsyncThunk<{ success: boolean }, IResetPa
 );
 
 // Подтверждение смены пароля
-export const confirmPasswordReset = createAsyncThunk<{ success: boolean }, IConfirmResetForm>(
+export const confirmPasswordReset = createAsyncThunk<{ success: boolean }, IConfirmResetForm, { rejectValue: string }>(
   'user/confirmPasswordReset',
   async (options, { rejectWithValue }) => {
     try {

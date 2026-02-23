@@ -6,7 +6,7 @@ import { IOrderApiResponse } from '../../types';
 
 const ulr = `${BASE_URL}/orders`;
 
-export const createOrder = createAsyncThunk<IOrderApiResponse, string[]>(
+export const createOrder = createAsyncThunk<IOrderApiResponse, string[], { rejectValue: string }>(
   'order/createOrder',
   async (ingredients, { rejectWithValue }) => {
     const accessToken = getCookie('accessToken');
