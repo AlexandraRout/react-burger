@@ -6,6 +6,8 @@ import NutritionalInformation from '../nutritional-information/nutritional-infor
 export default function IngredientDetails() {
   const { ingredient } = useSelector((state) => state.currentIngredient);
 
+  if (!ingredient) return <div>Загрузка...</div>;
+
   return (
     <div className={ingredientDetailsStyles.ingredient_details}>
       <img src={ingredient.image_large} alt={ingredient.name} width="480" height="240" className={ingredientDetailsStyles.image} />

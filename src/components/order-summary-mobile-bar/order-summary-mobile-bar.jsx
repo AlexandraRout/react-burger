@@ -9,7 +9,10 @@ export default function OrderSummaryMobileBar() {
   const [isOrdered, setIsOrdered] = useState(false);
 
   const open = () => setIsOpen(true);
-  const close = () => setIsOpen(false);
+  const close = () => {
+    setIsOpen(false);
+    setIsOrdered(false);
+  };
 
   return (
     <MobileBar buttonText="Смотреть заказ" onClick={open}>

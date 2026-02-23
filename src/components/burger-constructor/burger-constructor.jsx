@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
-import burgerConstructorStyles from './burger-constructor.module.css';
 import OrderSummary from '../order-summary/order-summary';
 import { addIngredientToConstructor, removeIngredientFromConstructor } from '../../services/burger-constructor/burger-constructor.slice';
 import { updateTotalPrice } from '../../services/order/order.slice';
@@ -10,13 +9,17 @@ import calculateTotalPrice from '../../utils/calculate-total-price';
 import DraggableDesktopElement from '../draggable-desktop-element/draggable-desktop-element';
 import BurgerConstructorEmptyState from '../burger-constructor-empty-state/burger-constructor-empty-state';
 import { selectBun, selectFillings } from '../../services/burger-constructor/burger-constructor.selectors';
+import Modal from '../../shared/components/modal/modal';
+import OrderDetails from '../order-details/order-details';
+import burgerConstructorStyles from './burger-constructor.module.css';
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
 
   const bun = useSelector(selectBun);
   const fillings = useSelector(selectFillings);
-  const ingredients = useSelector((state) => state.burgerConstructor.ingredients);
+  const { ingredients } = useSelector((state) => state.burgerConstructor);
+  const { orderId } = useSelector((state) => state.order);
 
   useEffect(() => {
     dispatch(updateTotalPrice(calculateTotalPrice(ingredients)));
@@ -39,6 +42,16 @@ export default function BurgerConstructor() {
       handleDrop(itemId);
     },
   });
+
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  const handleOrderCreated = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <section
@@ -80,8 +93,12 @@ export default function BurgerConstructor() {
             />
             )}
           </div>
-          <OrderSummary />
+          <OrderSummary onOrderCreated={handleOrderCreated} />
         </>
+      )}
+
+      {isModalOpen && (
+        <Modal isOpen={isModalOpen} onClose={closeModal}><OrderDetails orderId={orderId} /></Modal>
       )}
     </section>
   );

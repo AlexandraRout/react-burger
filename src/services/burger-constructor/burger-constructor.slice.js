@@ -19,6 +19,9 @@ const burgerConstructorSlice = createSlice({
       const { from, to } = action.payload;
       state.ingredients = moveIngredient(state.ingredients, from, to);
     },
+    removeAllIngredientsFromConstructor(state) {
+      state.ingredients = initialState.ingredients;
+    },
   },
 });
 
@@ -26,5 +29,7 @@ export const {
   addIngredientToConstructor,
   removeIngredientFromConstructor,
   moveIngredientInConstructor,
+  removeAllIngredientsFromConstructor,
 } = burgerConstructorSlice.actions;
+
 export default burgerConstructorSlice.reducer;

@@ -1,31 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import MobileBar from '../../shared/components/mobile-bar/mobile-bar';
 import mobileOrderDetailsStyles from './mobile-order-details.module.css';
 import MobileConstructorElement from '../mobile-constructor-element/mobile-constructor-element';
-import createOrder from '../../services/order/order.thunks';
+import { createOrder } from '../../services/order/order.thunks';
 import DraggleMobileElement
   from '../draggable-mobile-element/draggle-mobile-element';
 import { selectBun, selectFillings } from '../../services/burger-constructor/burger-constructor.selectors';
+import { removeAllIngredientsFromConstructor } from '../../services/burger-constructor/burger-constructor.slice';
 
 export default function MobileOrderDetails({ setIsOrdered }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const bun = useSelector(selectBun);
   const fillings = useSelector(selectFillings);
-  const ingredients = useSelector((state) => state.burgerConstructor.ingredients);
+  const { ingredients } = useSelector((state) => state.burgerConstructor);
   const { isLoading } = useSelector((state) => state.order);
+  const { isAuthChecked } = useSelector((state) => state.user);
 
   const handleCreateOrder = async () => {
     if (isLoading) return;
 
-    const ingredientIds = ingredients.map((ingredient) => ingredient._id);
-    try {
-      await dispatch(createOrder(ingredientIds)).unwrap();
-      setIsOrdered(true);
-    } catch (err) {
-      console.error(err);
+    if (isAuthChecked) {
+      const ingredientIds = ingredients.map((ingredient) => ingredient._id);
+      try {
+        await dispatch(createOrder(ingredientIds)).unwrap();
+        setIsOrdered(true);
+        dispatch(removeAllIngredientsFromConstructor());
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      navigate('/login');
     }
   };
 
