@@ -1,6 +1,6 @@
 import { ReactElement, useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { useAppDispatch, useAppSelector } from '../../hooks/typed-redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../types/typed-redux-hooks';
 import { moveIngredientInConstructor } from '../../services/burger-constructor/burger-constructor.slice';
 import { selectFillings } from '../../services/burger-constructor/burger-constructor.selectors';
 import { IIngredientWithUUID } from '../../types';

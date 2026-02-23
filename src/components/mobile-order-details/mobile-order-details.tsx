@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/typed-redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../types/typed-redux-hooks';
 import MobileBar from '../../shared/components/mobile-bar/mobile-bar';
 import mobileOrderDetailsStyles from './mobile-order-details.module.css';
 import MobileConstructorElement from '../mobile-constructor-element/mobile-constructor-element';

@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/typed-redux-hooks';
+import { useAppSelector } from '../../types/typed-redux-hooks';
 
 interface IForgotPasswordGuardProps {
   element: ReactElement;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppSelector } from '../../hooks/typed-redux-hooks';
+import { useAppSelector } from '../../types/typed-redux-hooks';
 import ingredientDetailsStyles from './ingredient-details.module.css';
 import NutritionalInformation from '../nutritional-information/nutritional-information';
 

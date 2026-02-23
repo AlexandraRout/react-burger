@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from './typed-redux-hooks';
+import { useAppDispatch, useAppSelector } from '../types/typed-redux-hooks';
 import { fetchUser } from '../services/user/user.thunks';
 
 const useAuth = () => {

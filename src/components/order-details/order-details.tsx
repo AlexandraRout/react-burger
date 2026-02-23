@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppSelector } from '../../hooks/typed-redux-hooks';
+import { useAppSelector } from '../../types/typed-redux-hooks';
 import done from '../../images/done.svg';
 import orderDetailsStyles from './order-details.module.css';
 

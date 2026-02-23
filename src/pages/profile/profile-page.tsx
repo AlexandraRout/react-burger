@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks/typed-redux-hooks';
+import { useAppDispatch } from '../../types/typed-redux-hooks';
 import profilePageStyles from './profile-page.module.css';
 import { logoutUser } from '../../services/user/user.thunks';
 import handleEnterOrSpace from '../../utils/handle-enter-or-space';

@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/typed-redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../types/typed-redux-hooks';
 import loginPageStyles from './login-page.module.css';
 import { loginUser } from '../../services/user/user.thunks';
 

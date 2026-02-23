@@ -4,7 +4,7 @@ import React, {
 import {
   Button, EmailInput, Input, PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useAppDispatch, useAppSelector } from '../../hooks/typed-redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../types/typed-redux-hooks';
 import { updateUser } from '../../services/user/user.thunks';
 import profileOverviewStyles from './profile-overview.module.css';
 

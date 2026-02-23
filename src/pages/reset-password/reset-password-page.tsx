@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks/typed-redux-hooks';
+import { useAppDispatch } from '../../types/typed-redux-hooks';
 import resetPasswordPageStyles from './reset-password-page.module.css';
 import { confirmPasswordReset } from '../../services/user/user.thunks';
 

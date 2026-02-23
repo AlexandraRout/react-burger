@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/typed-redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../types/typed-redux-hooks';
 import orderSummaryStyles from './order-summary.module.css';
 import { createOrder } from '../../services/order/order.thunks';
 import { removeAllIngredientsFromConstructor } from '../../services/burger-constructor/burger-constructor.slice';

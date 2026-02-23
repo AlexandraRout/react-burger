@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/typed-redux-hooks';
+import { useAppSelector } from '../../types/typed-redux-hooks';
 import IngredientsCard from '../ingredien-card/ingredien-card';
 import ingredientsSectionStyles from './ingredients-section.module.css';
 import { IIngredient } from '../../types';

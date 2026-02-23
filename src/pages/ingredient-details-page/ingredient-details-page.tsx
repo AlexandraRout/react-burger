@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/typed-redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../types/typed-redux-hooks';
 import IngredientDetails from '../../components/ingredient-details/ingredient-details';
 import { setCurrentIngredient } from '../../services/current-ingredient/current-ingredient.slice';
 import ingredientDetailsPageStyles from './ingredient-details-page.module.css';

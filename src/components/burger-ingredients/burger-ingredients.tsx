@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/typed-redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../types/typed-redux-hooks';
 import Tabs from '../tabs/tabs';
 import IngredientsSection from '../ingredients-section/ingredients-section';
 import burgerIngredientsStyles from './burger-ingredients.module.css';
@@ -24,7 +24,7 @@ export default function BurgerIngredients() {
 
   const handleTabClick = (tab: string) => {
     setCurrentTab(tab);
-    scrollToElement(scrollContainer.current, sections[tab].current as HTMLElement | null);
+    scrollToElement(scrollContainer.current, sections[tab].current);
   };
 
   const onClickIngredient = (ingredient: IIngredient) => {

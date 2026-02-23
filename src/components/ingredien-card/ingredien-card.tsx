@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Button, Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from 'react-dnd';
-import { useAppDispatch, useAppSelector } from '../../hooks/typed-redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../types/typed-redux-hooks';
 import handleEnterOrSpace from '../../utils/handle-enter-or-space';
 import ingredientCardStyles from './ingredient-card.module.css';
 import { addIngredientToConstructor } from '../../services/burger-constructor/burger-constructor.slice';

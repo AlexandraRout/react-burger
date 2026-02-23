@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useAppSelector } from '../../../hooks/typed-redux-hooks';
+import { useAppSelector } from '../../../types/typed-redux-hooks';
 import mobileBarStyles from './mobile-bar.module.css';
 
 interface IMobileBarProps {

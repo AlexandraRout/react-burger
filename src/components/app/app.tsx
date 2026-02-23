@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks/typed-redux-hooks';
+import { useAppDispatch } from '../../types/typed-redux-hooks';
 import BurgerConstructorPage from '../../pages/burger-constructor/burger-constructor-page';
 import LoginPage from '../../pages/login/login-page';
 import RegisterPage from '../../pages/register/register-page';
