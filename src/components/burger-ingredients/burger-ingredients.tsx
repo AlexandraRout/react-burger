@@ -6,19 +6,19 @@ import burgerIngredientsStyles from './burger-ingredients.module.css';
 import scrollToElement from '../../utils/scroll-to-element';
 import { setCurrentIngredient } from '../../services/current-ingredient/current-ingredient.slice';
 import useScrollTabsCallback from '../../hooks/use-scroll-tabs-callback';
-import { IIngredient } from '../../types';
+import { IIngredient, IngredientType } from '../../types';
 
 export default function BurgerIngredients() {
   const dispatch = useAppDispatch();
 
   const scrollContainer = useRef<HTMLDivElement | null>(null);
   const sections: Record<string, React.RefObject<HTMLElement | null>> = {
-    bun: useRef<HTMLElement | null>(null),
-    sauce: useRef<HTMLElement | null>(null),
-    main: useRef<HTMLElement | null>(null),
+    [IngredientType.Bun]: useRef<HTMLElement | null>(null),
+    [IngredientType.Sauce]: useRef<HTMLElement | null>(null),
+    [IngredientType.Main]: useRef<HTMLElement | null>(null),
   };
 
-  const [currentTab, setCurrentTab] = useState('bun');
+  const [currentTab, setCurrentTab] = useState<string>(IngredientType.Bun);
 
   const { items: ingredients, isLoading, error } = useAppSelector((state) => state.burgerIngredients);
 
@@ -52,9 +52,9 @@ export default function BurgerIngredients() {
             className={burgerIngredientsStyles.burger_ingredients_scroll}
             onScroll={onScroll}
           >
-            <IngredientsSection ref={sections.bun} title="Булки" type="bun" onClick={onClickIngredient} />
-            <IngredientsSection ref={sections.sauce} title="Соусы" type="sauce" onClick={onClickIngredient} />
-            <IngredientsSection ref={sections.main} title="Начинки" type="main" onClick={onClickIngredient} />
+            <IngredientsSection ref={sections[IngredientType.Bun]} title="Булки" type={IngredientType.Bun} onClick={onClickIngredient} />
+            <IngredientsSection ref={sections[IngredientType.Sauce]} title="Соусы" type={IngredientType.Sauce} onClick={onClickIngredient} />
+            <IngredientsSection ref={sections[IngredientType.Main]} title="Начинки" type={IngredientType.Main} onClick={onClickIngredient} />
           </div>
         </section>
       ) : null}

@@ -1,12 +1,12 @@
 import { nanoid } from '@reduxjs/toolkit';
-import { IIngredient, IIngredientWithUUID } from '../../types';
+import { IIngredient, IIngredientWithUUID, IngredientType } from '../../types';
 
 export const addIngredient = (ingredients: IIngredientWithUUID[], item: IIngredient): IIngredientWithUUID[] => {
   const ingredient: IIngredientWithUUID = { ...item, uuid: nanoid() };
 
-  if (ingredient.type === 'bun') {
+  if (ingredient.type === IngredientType.Bun) {
     return [
-      ...ingredients.filter((i) => i.type !== 'bun'),
+      ...ingredients.filter((i) => i.type !== IngredientType.Bun),
       ingredient,
       ingredient,
     ];
@@ -19,8 +19,8 @@ export const removeIngredient = (ingredients: IIngredientWithUUID[], uuid: strin
   .filter((item) => item.uuid !== uuid);
 
 export const moveIngredient = (ingredients: IIngredientWithUUID[], from: number, to: number): IIngredientWithUUID[] => {
-  const buns = ingredients.filter((i) => i.type === 'bun');
-  const fillings = ingredients.filter((i) => i.type !== 'bun');
+  const buns = ingredients.filter((i) => i.type === IngredientType.Bun);
+  const fillings = ingredients.filter((i) => i.type !== IngredientType.Bun);
 
   if (
     from < 0

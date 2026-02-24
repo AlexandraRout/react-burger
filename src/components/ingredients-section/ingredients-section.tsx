@@ -3,11 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../types/typed-redux-hooks';
 import IngredientsCard from '../ingredien-card/ingredien-card';
 import ingredientsSectionStyles from './ingredients-section.module.css';
-import { IIngredient } from '../../types';
+import { IIngredient, IngredientType } from '../../types';
 
 interface IIngredientsSectionProps {
   title: string;
-  type: string;
+  type: IngredientType;
   onClick: (ingredient: IIngredient) => void;
 }
 

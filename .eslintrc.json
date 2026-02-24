@@ -41,6 +41,8 @@
     }],
     "no-console": ["warn", { "allow": ["log", "warn", "error"] }],
     "no-undef": "off",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "error",
     "max-len": ["error", 120, 2, {

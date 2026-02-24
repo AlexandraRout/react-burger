@@ -1,6 +1,7 @@
 import React from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import tabsStyles from './tabs.module.css';
+import { IngredientType } from '../../types';
 
 interface ITabsProps {
   current: string;
@@ -9,9 +10,9 @@ interface ITabsProps {
 
 export default function Tabs({ current, setCurrent }: ITabsProps) {
   const tabs = [
-    { value: 'bun', label: 'Булки' },
-    { value: 'sauce', label: 'Соусы' },
-    { value: 'main', label: 'Начинки' },
+    { value: IngredientType.Bun, label: 'Булки' },
+    { value: IngredientType.Sauce, label: 'Соусы' },
+    { value: IngredientType.Main, label: 'Начинки' },
   ];
 
   return (

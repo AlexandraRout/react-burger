@@ -1,7 +1,13 @@
+export enum IngredientType {
+  Bun = 'bun',
+  Sauce = 'sauce',
+  Main = 'main',
+}
+
 export interface IIngredient {
   _id: string;
   name: string;
-  type: string;
+  type: IngredientType;
   proteins: number;
   fat: number;
   carbohydrates: number;
