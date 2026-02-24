@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { FormEvent } from 'react';
 import {
   Button, EmailInput, Input, PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -6,46 +6,23 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../types/typed-redux-hooks';
 import { registerUser } from '../../services/user/user.thunks';
 import registerPageStyles from './register-page.module.css';
+import useFormAndValidation from '../../hooks/use-form-and-validation';
 
 export default function RegisterPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const initialErrorState = {
-    name: '',
-    email: '',
-    password: '',
-  };
-
+  const {
+    values, handleChange, handleBlur, handleFocus, errors, touched, isValid,
+  } = useFormAndValidation({ name: '', email: '', password: '' });
   const { isLoading: loading } = useAppSelector((state) => state.user);
-
-  const [form, setForm] = useState(initialErrorState);
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const validate = () => {
-    const newErrors: Record<string, string> = {};
-
-    if (!form.name.trim()) newErrors.name = 'Введите имя';
-    if (!form.email.trim()) newErrors.email = 'Введите email';
-    if (!form.password.trim()) newErrors.password = 'Введите пароль';
-
-    setErrors(newErrors);
-
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-    setErrors(initialErrorState);
-  };
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    if (loading || !validate()) return;
+    if (loading || !isValid) return;
 
     try {
-      await dispatch(registerUser(form)).unwrap();
+      await dispatch(registerUser(values)).unwrap();
       navigate('/profile', { replace: true });
     } catch (err) {
       console.log(err);
@@ -61,27 +38,45 @@ export default function RegisterPage() {
           <Input
             placeholder="Имя"
             name="name"
-            value={form.name}
-            error={!!errors.name}
+            value={values.name}
+            error={!!(touched.name && errors.name)}
             errorText={errors.name}
             onChange={handleChange}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            required
           />
 
-          <EmailInput
-            placeholder="E-mail"
-            name="email"
-            value={form.email}
-            errorText={errors.email}
-            onChange={handleChange}
-          />
+          <div>
+            <EmailInput
+              placeholder="E-mail"
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              onFocus={handleFocus}
+              required
+            />
+            {touched.email && errors.email && (
+              <p className="text text_type_main-default text_color_error ml-6">{errors.email}</p>
+            )}
+          </div>
 
-          <PasswordInput
-            placeholder="Пароль"
-            name="password"
-            value={form.password}
-            errorText={errors.password}
-            onChange={handleChange}
-          />
+          <div>
+            <PasswordInput
+              placeholder="Пароль"
+              name="password"
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              onFocus={handleFocus}
+              required
+            />
+            {touched.password && errors.password && (
+              <p className="text text_type_main-default text_color_error ml-6">{errors.password}</p>
+            )}
+          </div>
+
           <Button htmlType="submit" type="primary" size="medium">{loading ? 'Загрузка...' : 'Зарегистрироваться'}</Button>
         </form>
 

@@ -1,23 +1,24 @@
-import React, {
-  useState, useEffect, ChangeEvent, FormEvent,
-} from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 import {
   Button, EmailInput, Input, PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useAppDispatch, useAppSelector } from '../../types/typed-redux-hooks';
 import { updateUser } from '../../services/user/user.thunks';
 import profileOverviewStyles from './profile-overview.module.css';
+import useFormAndValidation from '../../hooks/use-form-and-validation';
 
 export default function ProfileOverview() {
   const dispatch = useAppDispatch();
 
   const { user, isLoading } = useAppSelector((state) => state.user);
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const {
+    values, handleChange, handleBlur, handleFocus, errors, touched, isValid, setValues,
+  } = useFormAndValidation({ name: '', email: '', password: '' });
   const [showSaveButton, setShowSaveButton] = useState(false);
 
   useEffect(() => {
     if (user) {
-      setForm({
+      setValues({
         name: user.name || '',
         email: user.email || '',
         password: '',
@@ -28,32 +29,24 @@ export default function ProfileOverview() {
   useEffect(() => {
     let hasChanges = false;
     if (user) {
-      hasChanges = form.name !== user.name || form.email !== user.email || form.password !== '';
+      hasChanges = values.name !== user.name || values.email !== user.email || values.password !== '';
     }
     setShowSaveButton(hasChanges);
-  }, [form, user]);
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  }, [values, user]);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    if (isLoading) return;
+    if (isLoading || !isValid) return;
 
     try {
-      await dispatch(updateUser(form)).unwrap();
+      await dispatch(updateUser(values)).unwrap();
     } catch (err) {
       console.log(err);
     }
   };
 
   const handleReset = () => {
-    setForm({
+    setValues({
       name: user?.name || '',
       email: user?.email || '',
       password: '',
@@ -66,25 +59,38 @@ export default function ProfileOverview() {
         placeholder="Имя"
         name="name"
         size="default"
-        value={form.name}
+        value={values.name}
         icon="EditIcon"
+        error={!!(touched.name && errors.name)}
+        errorText={errors.name}
         onChange={handleChange}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
+        required
       />
 
-      <EmailInput
-        placeholder="Логин"
-        name="email"
-        size="default"
-        isIcon
-        value={form.email}
-        onChange={handleChange}
-      />
+      <div>
+        <EmailInput
+          placeholder="Логин"
+          name="email"
+          size="default"
+          isIcon
+          value={values.email}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          required
+        />
+        {touched.email && errors.email && (
+          <p className="text text_type_main-default text_color_error ml-6">{errors.email}</p>
+        )}
+      </div>
 
       <PasswordInput
         placeholder="Пароль"
         name="password"
         icon="EditIcon"
-        value={form.password}
+        value={values.password}
         onChange={handleChange}
       />
 

@@ -1,43 +1,27 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { FormEvent } from 'react';
 import { Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate } from 'react-router-dom';
+import forgotPasswordPageStyles from './forgot-password-page.module.css';
 import { useAppDispatch } from '../../types/typed-redux-hooks';
 import { resetPasswordUser } from '../../services/user/user.thunks';
-import forgotPasswordPageStyles from './forgot-password-page.module.css';
+import useFormAndValidation from '../../hooks/use-form-and-validation';
 
 export default function ForgotPasswordPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const initialErrorState = { email: '' };
-
-  const [form, setForm] = useState(initialErrorState);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const validate = () => {
-    const newErrors: Record<string, string> = {};
-    if (!form.email.trim()) newErrors.email = 'Введите email';
-    setErrors(newErrors);
-
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-    setErrors(initialErrorState);
-  };
+  const {
+    values, handleChange, handleBlur, handleFocus, errors, touched, isValid,
+  } = useFormAndValidation({ email: '' });
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    if (!isLoading && !validate()) return;
+    if (isLoading || !isValid) return;
+
     setIsLoading(true);
 
-    dispatch(resetPasswordUser(form))
+    dispatch(resetPasswordUser(values))
       .unwrap()
       .then(() => { navigate('/reset-password'); })
       .catch((error: unknown) => {
@@ -55,13 +39,20 @@ export default function ForgotPasswordPage() {
           className={forgotPasswordPageStyles.forgot_password_page_form}
           onSubmit={handleSubmit}
         >
-          <EmailInput
-            placeholder="E-mail"
-            name="email"
-            value={form.email}
-            errorText={errors.email}
-            onChange={handleChange}
-          />
+          <div>
+            <EmailInput
+              placeholder="E-mail"
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              onFocus={handleFocus}
+              required
+            />
+            {touched.email && errors.email && (
+              <p className="text text_type_main-default text_color_error ml-6">{errors.email}</p>
+            )}
+          </div>
 
           <Button htmlType="submit" type="primary" size="medium">{isLoading ? 'Загрузка...' : 'Восстановить'}</Button>
         </form>
