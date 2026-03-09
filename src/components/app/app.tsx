@@ -15,7 +15,10 @@ import ForgotPasswordGuard from '../forgot-password-guard/forgot-password-guard'
 import IngredientDetailsPage from '../../pages/ingredient-details-page/ingredient-details-page';
 import fetchIngredients from '../../services/burger-ingredients/burger-ingredients.thunks';
 import ModalIngredientDetails from '../modal-Ingredient-details/modal-Ingredient-details';
+import ModalOrderDetails from '../modal-order-details/modal-order-details';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
+import OrderFeedPage from '../../pages/order-feed/order-feed-page';
+import OrderDetailsPage from '../../pages/order-details/order-details-page';
 import MainLayout from '../main-layout/main-layout';
 import SimpleLayout from '../simple-layout/simple-layout';
 import FullScreenLoader from '../full-screen-loader/full-screen-loader';
@@ -39,6 +42,8 @@ export default function App() {
         {/* Layout с нижним баром */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<BurgerConstructorPage />} />
+          <Route path="/feed" element={<OrderFeedPage />} />
+          <Route path="/feed/:id" element={<OrderDetailsPage />} />
           <Route path="/ingredients/:id" element={<IngredientDetailsPage />} />
         </Route>
 
@@ -51,6 +56,10 @@ export default function App() {
             <Route index element={<ProfileOverview />} />
             <Route path="orders" element={<OrdersHistory />} />
           </Route>
+          <Route
+            path="/profile/orders/:id"
+            element={<ProtectedRouteElement element={<OrderDetailsPage />} />}
+          />
 
           <Route
             path="/login"
@@ -80,6 +89,8 @@ export default function App() {
       {background && (
         <Routes>
           <Route path="/ingredients/:id" element={<ModalIngredientDetails />} />
+          <Route path="/feed/:id" element={<ModalOrderDetails />} />
+          <Route path="/profile/orders/:id" element={<ModalOrderDetails />} />
         </Routes>
       )}
     </>

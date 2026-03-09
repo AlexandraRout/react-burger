@@ -40,6 +40,22 @@ export interface IAuthResponse {
   refreshToken: string;
 }
 
+export enum OrderStatusText {
+  created = 'Создан',
+  pending = 'Готовится',
+  done = 'Выполнен',
+}
+
+export interface IOrder {
+  _id: string;
+  ingredients: string[];
+  status: 'created' | 'pending' | 'done';
+  name: string;
+  number: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface IOrderApiResponse {
   success: boolean;
   name: string;
