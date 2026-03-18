@@ -1,6 +1,6 @@
 import React from 'react';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
-import { IOrder, OrderStatusText } from '../../types';
+import { IOrder, OrderStatus, OrderStatusText } from '../../types';
 import { useAppSelector } from '../../types/typed-redux-hooks';
 import orderCardStyles from './order-card.module.css';
 
@@ -46,7 +46,7 @@ export default function OrderCard({ order, showStatus = false }: IOrderCardProps
         <p className="text text_type_main-medium">{order.name}</p>
 
         {showStatus && (
-          <p className={`text text_type_main-default mt-2 ${order.status === 'done' ? orderCardStyles.status_done : ''}`}>
+          <p className={`text text_type_main-default mt-2 ${order.status === OrderStatus.Done ? orderCardStyles.status_done : ''}`}>
             {OrderStatusText[order.status]}
           </p>
         )}

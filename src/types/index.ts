@@ -40,20 +40,41 @@ export interface IAuthResponse {
   refreshToken: string;
 }
 
-export enum OrderStatusText {
-  created = 'Создан',
-  pending = 'Готовится',
-  done = 'Выполнен',
+export enum OrderStatus {
+  Created = 'created',
+  Pending = 'pending',
+  Done = 'done',
 }
+
+export const OrderStatusText: Record<OrderStatus, string> = {
+  [OrderStatus.Created]: 'Создан',
+  [OrderStatus.Pending]: 'Готовится',
+  [OrderStatus.Done]: 'Выполнен',
+};
 
 export interface IOrder {
   _id: string;
   ingredients: string[];
-  status: 'created' | 'pending' | 'done';
+  status: OrderStatus;
   name: string;
   number: number;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface IOrderFeedMessage {
+  success: boolean;
+  orders: IOrder[];
+  total: number;
+  totalToday: number;
+}
+
+export interface IOrderFeedState {
+  orders: IOrder[];
+  total: number;
+  totalToday: number;
+  isConnected: boolean;
+  error: string | null;
 }
 
 export interface IOrderApiResponse {
@@ -62,6 +83,11 @@ export interface IOrderApiResponse {
   order: {
     number: number;
   };
+}
+
+export interface IOrderByNumberResponse {
+  success: boolean;
+  orders: IOrder[];
 }
 
 export interface ITokenRefreshResponse {

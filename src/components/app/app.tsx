@@ -42,13 +42,13 @@ export default function App() {
         {/* Layout с нижним баром */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<BurgerConstructorPage />} />
-          <Route path="/feed" element={<OrderFeedPage />} />
-          <Route path="/feed/:id" element={<OrderDetailsPage />} />
           <Route path="/ingredients/:id" element={<IngredientDetailsPage />} />
         </Route>
 
         {/* Layout без нижнего бара */}
         <Route element={<SimpleLayout />}>
+          <Route path="/feed" element={<OrderFeedPage />} />
+          <Route path="/feed/:id" element={<OrderDetailsPage />} />
           <Route
             path="/profile"
             element={<ProtectedRouteElement element={<ProfilePage />} />}
@@ -60,7 +60,6 @@ export default function App() {
             path="/profile/orders/:id"
             element={<ProtectedRouteElement element={<OrderDetailsPage />} />}
           />
-
           <Route
             path="/login"
             element={<ProtectedRouteElement isOnlyUnAuth element={<LoginPage />} />}

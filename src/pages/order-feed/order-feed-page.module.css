@@ -1,22 +1,39 @@
 .content {
+  flex: 1;
+  min-height: 0;
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
 }
 
 .orders_list {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  max-height: calc(100vh - 200px);
   overflow-y: auto;
   padding-right: 20px;
+  padding-bottom: 20px;
+
+  @media (max-width: 1200px) {
+    overflow-y: visible;
+    min-height: auto;
+  }
 }
 
 .stats {
   display: flex;
   flex-direction: column;
   gap: 60px;
+
+  @media (max-width: 1200px) {
+    order: -1;
+  }
 }
 
 .status_columns {

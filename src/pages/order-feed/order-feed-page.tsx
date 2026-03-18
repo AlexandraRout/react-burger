@@ -1,14 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import OrderCard from '../../components/order-card/order-card';
-import mockOrders from '../../mocks/orders';
+import { useAppDispatch, useAppSelector } from '../../types/typed-redux-hooks';
+import { connect, disconnect } from '../../services/order-feed/order-feed.slice';
+import { OrderStatus } from '../../types';
 import orderFeedPageStyles from './order-feed-page.module.css';
 
-const doneOrders = mockOrders.filter((o) => o.status === 'done');
-const inProgressOrders = mockOrders.filter((o) => o.status === 'pending' || o.status === 'created');
+const WS_URL = 'wss://norma.education-services.ru/orders/all';
 
 export default function OrderFeedPage() {
+  const dispatch = useAppDispatch();
   const location = useLocation();
+  const { orders, total, totalToday } = useAppSelector((state) => state.ordersFeed);
+
+  useEffect(() => {
+    dispatch(connect(WS_URL));
+    return () => {
+      dispatch(disconnect());
+    };
+  }, [dispatch]);
+
+  const doneOrders = orders.filter((order) => order.status === OrderStatus.Done);
+  const inProgressOrders = orders.filter((order) => [OrderStatus.Pending, OrderStatus.Created].includes(order.status));
 
   return (
     <>
@@ -16,7 +29,7 @@ export default function OrderFeedPage() {
 
       <div className={orderFeedPageStyles.content}>
         <div className={orderFeedPageStyles.orders_list}>
-          {mockOrders.map((order) => (
+          {orders.map((order) => (
             <Link
               key={order._id}
               to={`/feed/${order.number}`}
@@ -55,14 +68,14 @@ export default function OrderFeedPage() {
           <div>
             <p className="text text_type_main-medium">Выполнено за все время:</p>
             <span className={`text text_type_digits-large ${orderFeedPageStyles.total_number}`}>
-              34536
+              {total}
             </span>
           </div>
 
           <div className={orderFeedPageStyles.total_block}>
             <p className="text text_type_main-medium">Выполнено за сегодня:</p>
             <span className={`text text_type_digits-large ${orderFeedPageStyles.total_number}`}>
-              206
+              {totalToday}
             </span>
           </div>
         </div>
