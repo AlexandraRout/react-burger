@@ -15,20 +15,20 @@ export default function useOrderData(
   const detailsOrder = useAppSelector((state) => state.orderDetails.order);
   const allIngredients = useAppSelector((state) => state.burgerIngredients.items);
 
-  const order = feedOrders.find((o) => o.number.toString() === id)
-    ?? userOrders.find((o) => o.number.toString() === id)
+  const order = feedOrders.find((feedOrder) => feedOrder.number.toString() === id)
+    ?? userOrders.find((feedOrder) => feedOrder.number.toString() === id)
     ?? (detailsOrder && detailsOrder.number.toString() === id ? detailsOrder : null);
 
   if (!order) return null;
 
   const countMap = new Map<string, number>();
-  order.ingredients.forEach((ingId) => {
-    countMap.set(ingId, (countMap.get(ingId) ?? 0) + 1);
+  order.ingredients.forEach((ingredientId) => {
+    countMap.set(ingredientId, (countMap.get(ingredientId) ?? 0) + 1);
   });
 
   const uniqueIngredients: IOrderData['uniqueIngredients'] = [];
-  countMap.forEach((count, ingId) => {
-    const found = allIngredients.find((ing) => ing._id === ingId);
+  countMap.forEach((count, ingredientId) => {
+    const found = allIngredients.find((ingredient) => ingredient._id === ingredientId);
     if (found) {
       uniqueIngredients.push({ ingredient: found, count });
     }

@@ -9,7 +9,7 @@ const initialState: IOrderFeedState = {
   error: null,
 };
 
-export default function createOrderFeedSlice(name: string) {
+export default function createWsSlice(name: string) {
   const actions = {
     connect: createAction<string>(`${name}/connect`),
     disconnect: createAction(`${name}/disconnect`),

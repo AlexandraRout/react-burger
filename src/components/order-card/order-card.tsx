@@ -1,6 +1,8 @@
 import React from 'react';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
-import { IOrder, OrderStatus, OrderStatusText } from '../../types';
+import {
+  IIngredient, IOrder, OrderStatus, OrderStatusText,
+} from '../../types';
 import { useAppSelector } from '../../types/typed-redux-hooks';
 import orderCardStyles from './order-card.module.css';
 
@@ -15,10 +17,10 @@ export default function OrderCard({ order, showStatus = false }: IOrderCardProps
   const allIngredients = useAppSelector((state) => state.burgerIngredients.items);
 
   const orderIngredients = order.ingredients
-    .map((id) => allIngredients.find((ing) => ing._id === id))
-    .filter(Boolean) as NonNullable<typeof allIngredients[0]>[];
+    .map((id) => allIngredients.find((ingredient) => ingredient._id === id))
+    .filter((ingredient): ingredient is IIngredient => Boolean(ingredient));
 
-  const totalPrice = orderIngredients.reduce((sum, ing) => sum + ing.price, 0);
+  const totalPrice = orderIngredients.reduce((sum, ingredient) => sum + ingredient.price, 0);
 
   const visibleIngredients = orderIngredients.slice(0, maxVisibleIngredients);
   const extraIngredient = orderIngredients.length > maxVisibleIngredients
@@ -26,10 +28,10 @@ export default function OrderCard({ order, showStatus = false }: IOrderCardProps
   const hiddenCount = orderIngredients.length - maxVisibleIngredients;
 
   const countMap = new Map<string, number>();
-  const visibleIngredientsWithKeys = visibleIngredients.map((ing) => {
-    const count = (countMap.get(ing._id) ?? 0) + 1;
-    countMap.set(ing._id, count);
-    return { ing, key: `${ing._id}-${count}` };
+  const visibleIngredientsWithKeys = visibleIngredients.map((ingredient) => {
+    const count = (countMap.get(ingredient._id) ?? 0) + 1;
+    countMap.set(ingredient._id, count);
+    return { ing: ingredient, key: `${ingredient._id}-${count}` };
   });
 
   return (
@@ -37,7 +39,7 @@ export default function OrderCard({ order, showStatus = false }: IOrderCardProps
       <div className={orderCardStyles.container}>
         <span className="text text_type_digits-default">
           #
-          {String(order.number).padStart(6, '0')}
+          {order.number}
         </span>
         <FormattedDate className="text text_type_main-default text_color_inactive" date={new Date(order.createdAt)} />
       </div>
@@ -46,7 +48,7 @@ export default function OrderCard({ order, showStatus = false }: IOrderCardProps
         <p className="text text_type_main-medium">{order.name}</p>
 
         {showStatus && (
-          <p className={`text text_type_main-default mt-2 ${order.status === OrderStatus.Done ? orderCardStyles.status_done : ''}`}>
+          <p className={`text text_type_main-default mt-2 ${order.status === OrderStatus.Done && orderCardStyles.status_done}`}>
             {OrderStatusText[order.status]}
           </p>
         )}

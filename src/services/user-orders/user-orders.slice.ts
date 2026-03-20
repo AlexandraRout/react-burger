@@ -1,6 +1,6 @@
-import createOrderFeedSlice from './create-order-feed-slice';
+import createWsSlice from '../ws/create-ws-slice';
 
-const userOrders = createOrderFeedSlice('userOrders');
+const userOrders = createWsSlice('userOrders');
 
 export const {
   connect: userOrdersConnect,

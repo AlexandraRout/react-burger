@@ -19,7 +19,6 @@ export default function OrderDetailsPage() {
     }
   }, [dispatch, id, orderData]);
 
-  // проверить
   useEffect(() => () => {
     dispatch(clearOrder());
   }, [dispatch]);

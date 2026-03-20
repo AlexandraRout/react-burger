@@ -17,7 +17,7 @@ import fetchIngredients from '../../services/burger-ingredients/burger-ingredien
 import ModalIngredientDetails from '../modal-Ingredient-details/modal-Ingredient-details';
 import ModalOrderDetails from '../modal-order-details/modal-order-details';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import OrderFeedPage from '../../pages/order-feed/order-feed-page';
+import OrderFeedPage from '../../pages/feed/feed-page';
 import OrderDetailsPage from '../../pages/order-details/order-details-page';
 import MainLayout from '../main-layout/main-layout';
 import SimpleLayout from '../simple-layout/simple-layout';

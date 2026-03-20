@@ -6,10 +6,10 @@ import burgerConstructorReducer from './burger-constructor/burger-constructor.sl
 import currentIngredientReducer from './current-ingredient/current-ingredient.slice';
 import orderReducer from './order/order.slice';
 import userSlice from './user/user.slice';
-import ordersFeedReducer, { ordersFeedActions } from './order-feed/order-feed.slice';
-import userOrdersReducer, { userOrdersActions } from './order-feed/user-orders.slice';
+import ordersFeedReducer, { ordersFeedActions } from './orders-feed/orders-feed.slice';
+import userOrdersReducer, { userOrdersActions } from './user-orders/user-orders.slice';
 import orderDetailsReducer from './order-details/order-details.slice';
-import createWebSocketMiddleware from './middleware/websocket-middleware';
+import createWebSocketMiddleware from './ws/websocket-middleware';
 import { IOrderFeedMessage } from '../types';
 
 const ordersFeedMiddleware = createWebSocketMiddleware<IOrderFeedMessage>(
