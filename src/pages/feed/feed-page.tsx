@@ -11,6 +11,7 @@ export default function OrderFeedPage() {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const { orders, total, totalToday } = useAppSelector((state) => state.ordersFeed);
+  const isIngredientsLoaded = useAppSelector((state) => state.burgerIngredients.items.length > 0);
 
   useEffect(() => {
     dispatch(connect(wsAllOrdersUrl));
@@ -27,17 +28,19 @@ export default function OrderFeedPage() {
       <h1 className="text text_type_main-large mt-10 mb-5">Лента заказов</h1>
 
       <div className={feedPageStyles.content}>
-        <div className={feedPageStyles.orders_list}>
-          {orders.map((order) => (
-            <Link
-              key={order._id}
-              to={`/feed/${order.number}`}
-              state={{ background: location }}
-            >
-              <OrderCard order={order} />
-            </Link>
-          ))}
-        </div>
+        {isIngredientsLoaded && (
+          <div className={feedPageStyles.orders_list}>
+            {orders.map((order) => (
+              <Link
+                key={order._id}
+                to={`/feed/${order.number}`}
+                state={{ background: location }}
+              >
+                <OrderCard order={order} />
+              </Link>
+            ))}
+          </div>
+        )}
 
         <div className={feedPageStyles.stats}>
           <div className={feedPageStyles.status_columns}>

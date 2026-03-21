@@ -67,6 +67,7 @@ export interface IOrderFeedMessage {
   orders: IOrder[];
   total: number;
   totalToday: number;
+  message?: string;
 }
 
 export interface IOrderFeedState {

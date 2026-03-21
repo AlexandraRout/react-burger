@@ -6,5 +6,5 @@ export const {
   connect: userOrdersConnect,
   disconnect: userOrdersDisconnect,
 } = userOrders.actions;
-export const userOrdersActions = userOrders.actions;
+export const userOrdersActionTypes = userOrders.actionTypes;
 export default userOrders.reducer;

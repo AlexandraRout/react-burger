@@ -1,113 +1,69 @@
-import {
-  type ActionCreatorWithoutPayload,
-  type ActionCreatorWithPayload,
-  type Dispatch,
-  type Middleware,
-  type MiddlewareAPI,
-  type UnknownAction,
-} from '@reduxjs/toolkit';
+import { type Middleware } from '@reduxjs/toolkit';
 
-import refreshToken from '../../api/refresh-token';
-import { RootState } from '../root-reducer';
-
-type WebSocketActions<TMessage> = {
-  connect: ActionCreatorWithPayload<string>;
-  disconnect: ActionCreatorWithoutPayload;
-  sendMessage: ActionCreatorWithPayload<TMessage>;
-  onConnected: ActionCreatorWithPayload<Event>;
-  onDisconnected: ActionCreatorWithPayload<CloseEvent>;
-  onMessageReceived: ActionCreatorWithPayload<TMessage>;
-  onError: ActionCreatorWithPayload<Event>;
+export type TWsActionTypes = {
+  wsConnect: string;
+  wsDisconnect: string;
+  wsSendMessage: string;
+  onOpen: string;
+  onClose: string;
+  onMessage: string;
+  onError: string;
 };
 
-type WebSocketOptions = {
-  withTokenRefresh: boolean;
-};
+const reconnectDelay = 3000;
 
-export default function createWebSocketMiddleware<TMessage>(
-  {
-    connect,
-    disconnect,
-    sendMessage,
-    onConnected,
-    onDisconnected,
-    onMessageReceived,
-    onError,
-  }: WebSocketActions<TMessage>,
-  { withTokenRefresh }: WebSocketOptions,
-): Middleware<unknown, RootState, Dispatch<UnknownAction>> {
-  let socket: WebSocket | null = null;
-  let isConnected = false;
-  let reconnectTimer = 0;
-  let url: string;
+export function socketMiddleware(wsActions: TWsActionTypes): Middleware {
+  return (store) => {
+    let socket: WebSocket | null = null;
+    let isConnected = false;
+    let reconnectTimer = 0;
+    let url = '';
 
-  return (
-    (
-      store: MiddlewareAPI<Dispatch<UnknownAction>, RootState>,
-    ) => (next: Dispatch<UnknownAction>) => (action: UnknownAction) => {
-      if (connect.match(action)) {
-        if (socket !== null) {
-          return next(action);
-        }
+    return (next) => (action: unknown) => {
+      const { type, payload } = action as { type: string; payload?: unknown };
 
-        url = action.payload;
+      if (type === wsActions.wsConnect) {
+        if (socket !== null) return next(action);
+
+        url = payload as string;
         socket = new WebSocket(url);
         isConnected = true;
 
-        socket.onopen = (event) => {
-          store.dispatch(onConnected(event));
+        socket.onopen = () => {
+          store.dispatch({ type: wsActions.onOpen });
         };
-
-        socket.onclose = (event) => {
-          store.dispatch(onDisconnected(event));
+        socket.onclose = () => {
+          store.dispatch({ type: wsActions.onClose });
           socket = null;
-
           if (isConnected) {
             reconnectTimer = window.setTimeout(() => {
-              store.dispatch(connect(url));
-            }, 3000);
+              store.dispatch({ type: wsActions.wsConnect, payload: url });
+            }, reconnectDelay);
           }
         };
-
         socket.onmessage = (event) => {
-          const data = JSON.parse(event.data);
-
-          if (withTokenRefresh && data.message === 'Invalid or missing token') {
-            refreshToken().then((refreshData) => {
-              const wssUrl = new URL(url);
-              wssUrl.searchParams.set('token', refreshData.accessToken.replace('Bearer ', ''));
-              store.dispatch(connect(wssUrl.toString()));
-            });
-
-            store.dispatch(disconnect());
-            return;
-          }
-
-          store.dispatch(onMessageReceived(data));
+          store.dispatch({ type: wsActions.onMessage, payload: JSON.parse(event.data) });
         };
-
-        socket.onerror = (event) => {
-          store.dispatch(onError(event));
+        socket.onerror = () => {
+          store.dispatch({ type: wsActions.onError, payload: 'WebSocket error' });
         };
       }
 
-      if (disconnect.match(action)) {
-        if (socket !== null) {
-          socket.close();
-        }
-
+      if (type === wsActions.wsDisconnect) {
+        socket?.close();
         clearTimeout(reconnectTimer);
         isConnected = false;
         reconnectTimer = 0;
         socket = null;
       }
 
-      if (sendMessage.match(action)) {
+      if (type === wsActions.wsSendMessage) {
         if (socket !== null && socket.readyState === WebSocket.OPEN) {
-          socket.send(JSON.stringify(action.payload));
+          socket.send(JSON.stringify(payload));
         }
       }
 
       return next(action);
-    }) as Middleware;
+    };
+  };
 }
