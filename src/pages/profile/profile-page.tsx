@@ -22,32 +22,30 @@ export default function ProfilePage() {
   return (
     <div className={profilePageStyles.profile_page}>
       <nav className={profilePageStyles.nav_bar}>
-        <div className={profilePageStyles.nav_bar}>
-          {navItems.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              end={item.end}
-              className={getLinkStyle}
-            >
-              {item.label}
-            </NavLink>
-          ))}
-
-          <div
-            role="button"
-            tabIndex={0}
-            className={`text text_type_main-medium pb-4 pt-4 text_color_inactive ${profilePageStyles.exit_button}`}
-            onClick={logout}
-            onKeyDown={handleEnterOrSpace(() => logout())}
+        {navItems.map((item) => (
+          <NavLink
+            key={item.to}
+            to={item.to}
+            end={item.end}
+            className={getLinkStyle}
           >
-            Выход
-          </div>
+            {item.label}
+          </NavLink>
+        ))}
 
-          <p className="mt-20 text text_type_main-default text_color_inactive">
-            В этом разделе вы можете изменить свои персональные данные
-          </p>
+        <div
+          role="button"
+          tabIndex={0}
+          className={`text text_type_main-medium pb-4 pt-4 text_color_inactive ${profilePageStyles.exit_button}`}
+          onClick={logout}
+          onKeyDown={handleEnterOrSpace(() => logout())}
+        >
+          Выход
         </div>
+
+        <p className="mt-20 text text_type_main-default text_color_inactive">
+          В этом разделе вы можете изменить свои персональные данные
+        </p>
       </nav>
 
       <Outlet />

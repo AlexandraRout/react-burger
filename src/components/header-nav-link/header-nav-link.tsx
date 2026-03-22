@@ -12,6 +12,7 @@ export default function HeaderNavLink({ to, icon: IconComponent, text }: IHeader
   return (
     <NavLink
       to={to}
+      end
       className={({ isActive }) => `${navLinkStyles.header_nav_link} ${isActive ? 'text_color_primary' : 'text_color_inactive'}`}
     >
       {({ isActive }) => (

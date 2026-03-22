@@ -1,6 +1,11 @@
 :root {
   --modal-bg: #1C1C21;
   --text-primary-light: #F2F2F3;
+  --color-success: #00cccc;
+  --text-shadow-glow:
+    0 4px 32px rgba(51, 51, 255, 0.5),
+    0 0 8px rgba(51, 51, 255, 0.25),
+    0 0 16px rgba(51, 51, 255, 0.25);
 }
 
 * {

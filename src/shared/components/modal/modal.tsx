@@ -6,7 +6,7 @@ import modalStyles from './modal.module.css';
 
 interface IModalProps {
   isOpen: boolean;
-  title?: string;
+  title?: ReactNode;
   children?: ReactNode;
   onClose: () => void;
 }
@@ -40,7 +40,10 @@ export default function Modal({
       </div>
       <div className={modalStyles.modal}>
         <div className={modalStyles.header}>
-          {title && (<h2 className="text text_type_main-large">{title}</h2>)}
+          {title && (typeof title === 'string'
+            ? <h2 className="text text_type_main-large">{title}</h2>
+            : title
+          )}
           <Button htmlType="button" type="secondary" size="small" extraClass={modalStyles.close_button} onClick={onClose}>
             <CloseIcon type="primary" />
           </Button>
