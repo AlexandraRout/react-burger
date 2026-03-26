@@ -24,7 +24,7 @@ const burgerIngredientsSlice = createSlice({
       })
       .addCase(fetchIngredients.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload ?? null;
+        state.error = action.payload ?? 'Произошла неизвестная ошибка';
         state.items = [];
       });
   },

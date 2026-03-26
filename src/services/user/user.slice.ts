@@ -33,7 +33,7 @@ const userSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload ?? null;
+        state.error = action.payload ?? 'Произошла неизвестная ошибка';
       })
     // Логин
       .addCase(loginUser.pending, (state) => {
@@ -48,7 +48,7 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload ?? null;
+        state.error = action.payload ?? 'Произошла неизвестная ошибка';
         state.isAuthChecked = false;
       })
     // Получение пользователя
@@ -63,7 +63,7 @@ const userSlice = createSlice({
       })
       .addCase(fetchUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload ?? null;
+        state.error = action.payload ?? 'Произошла неизвестная ошибка';
         deleteCookie('accessToken');
       })
     // Обновление пользователя
@@ -77,7 +77,7 @@ const userSlice = createSlice({
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload ?? null;
+        state.error = action.payload ?? 'Произошла неизвестная ошибка';
       })
     // Логаут
       .addCase(logoutUser.fulfilled, (state) => {
@@ -86,7 +86,7 @@ const userSlice = createSlice({
         state.isAuthChecked = false;
       })
       .addCase(logoutUser.rejected, (state, action) => {
-        state.error = action.payload ?? null;
+        state.error = action.payload ?? 'Произошла неизвестная ошибка';
       })
     // Смена пароля
       .addCase(resetPasswordUser.fulfilled, (state) => {
