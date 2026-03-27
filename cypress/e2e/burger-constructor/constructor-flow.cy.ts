@@ -1,4 +1,4 @@
-import { dataCy } from '../../support/selectors';
+import { dataCy } from './selectors';
 
 // Точка отсечения desktop/mobile из CSS: burger-constructor-page.module.css
 // .burger_constructor { display: none } при max-width: 1228px
