@@ -1,3 +1,5 @@
+import { dataCy } from '../../support/selectors';
+
 // Точка отсечения desktop/mobile из CSS: burger-constructor-page.module.css
 // .burger_constructor { display: none } при max-width: 1228px
 interface IViewport { width: number; height: number }
@@ -32,13 +34,13 @@ describe('Drag & Drop (desktop)', () => {
 
   it('добавляет булку в конструктор перетаскиванием', () => {
     cy.addIngredientToConstructor(0);
-    cy.get('[data-cy="constructor-drop-area"]').should('contain', 'Краторная булка N-200i');
+    cy.get(dataCy.constructorDropArea).should('contain', 'Краторная булка N-200i');
   });
 
   it('добавляет начинку в конструктор перетаскиванием', () => {
     cy.addIngredientToConstructor(0); // булка   (index 0: bun)
     cy.addIngredientToConstructor(2); // начинка (index 2: main — после bun и sauce)
-    cy.get('[data-cy="constructor-drop-area"]').should('contain', 'Биокотлета из марсианской Магнолии');
+    cy.get(dataCy.constructorDropArea).should('contain', 'Биокотлета из марсианской Магнолии');
   });
 });
 
@@ -53,12 +55,12 @@ describe('Кнопка «Добавить» (mobile)', () => {
   it('добавляет булку кнопкой «Добавить»', () => {
     cy.addIngredientToConstructor(0);
     // На мобиле конструктор скрыт, проверяем счётчик на карточке
-    cy.get('[data-cy="ingredient-card"]').eq(0).find('.counter').should('exist');
+    cy.get(dataCy.ingredientCard).eq(0).find('.counter').should('exist');
   });
 
   it('добавляет начинку кнопкой «Добавить»', () => {
     cy.addIngredientToConstructor(2); // index 2: main (после bun и sauce)
-    cy.get('[data-cy="ingredient-card"]').eq(2).find('.counter').should('exist');
+    cy.get(dataCy.ingredientCard).eq(2).find('.counter').should('exist');
   });
 });
 
@@ -71,40 +73,45 @@ describe('Модальное окно ингредиента', () => {
   });
 
   it('открывает модальное окно при клике на ингредиент', () => {
-    cy.get('[data-cy="ingredient-card"]').eq(0).click();
-    cy.get('[data-cy="modal"]').should('be.visible');
-    cy.get('[data-cy="modal"]').should('contain', 'Детали ингредиента');
+    cy.get(dataCy.ingredientCard).eq(0).click();
+    cy.get(dataCy.modal).as('modal');
+    cy.get('@modal').should('be.visible');
+    cy.get('@modal').should('contain', 'Детали ингредиента');
   });
 
   it('отображает данные ингредиента в модальном окне', () => {
-    cy.get('[data-cy="ingredient-card"]').eq(0).click();
-    cy.get('[data-cy="modal"]').should('be.visible');
-    cy.get('[data-cy="modal"]').should('contain', 'Краторная булка N-200i');
-    cy.get('[data-cy="modal"]').should('contain', '420'); // calories
-    cy.get('[data-cy="modal"]').should('contain', '80'); // proteins
-    cy.get('[data-cy="modal"]').should('contain', '24'); // fat
-    cy.get('[data-cy="modal"]').should('contain', '53'); // carbohydrates
+    cy.get(dataCy.ingredientCard).eq(0).click();
+    cy.get(dataCy.modal).as('modal');
+    cy.get('@modal').should('be.visible');
+    cy.get('@modal').should('contain', 'Краторная булка N-200i');
+    cy.get('@modal').should('contain', '420'); // calories
+    cy.get('@modal').should('contain', '80'); // proteins
+    cy.get('@modal').should('contain', '24'); // fat
+    cy.get('@modal').should('contain', '53'); // carbohydrates
   });
 
   it('закрывает модальное окно кнопкой ✕', () => {
-    cy.get('[data-cy="ingredient-card"]').eq(0).click();
-    cy.get('[data-cy="modal"]').should('be.visible');
-    cy.get('[data-cy="modal-close-button"]').click();
-    cy.get('[data-cy="modal"]').should('not.exist');
+    cy.get(dataCy.ingredientCard).eq(0).click();
+    cy.get(dataCy.modal).as('modal');
+    cy.get('@modal').should('be.visible');
+    cy.get(dataCy.modalCloseBtn).click();
+    cy.get('@modal').should('not.exist');
   });
 
   it('закрывает модальное окно кликом на оверлей', () => {
-    cy.get('[data-cy="ingredient-card"]').eq(0).click();
-    cy.get('[data-cy="modal"]').should('be.visible');
-    cy.get('[data-cy="modal-overlay"]').click({ force: true });
-    cy.get('[data-cy="modal"]').should('not.exist');
+    cy.get(dataCy.ingredientCard).eq(0).click();
+    cy.get(dataCy.modal).as('modal');
+    cy.get('@modal').should('be.visible');
+    cy.get(dataCy.modalOverlay).click({ force: true });
+    cy.get('@modal').should('not.exist');
   });
 
   it('закрывает модальное окно клавишей Escape', () => {
-    cy.get('[data-cy="ingredient-card"]').eq(0).click();
-    cy.get('[data-cy="modal"]').should('be.visible');
+    cy.get(dataCy.ingredientCard).eq(0).click();
+    cy.get(dataCy.modal).as('modal');
+    cy.get('@modal').should('be.visible');
     cy.get('body').type('{esc}');
-    cy.get('[data-cy="modal"]').should('not.exist');
+    cy.get('@modal').should('not.exist');
   });
 });
 
@@ -122,31 +129,35 @@ describe('Создание заказа (desktop)', () => {
   it('оформляет заказ и показывает модальное окно с номером заказа', () => {
     cy.contains('Оформить заказ').click();
     cy.wait('@createOrder');
-    cy.get('[data-cy="modal"]').should('be.visible');
-    cy.get('[data-cy="order-id"]').should('contain', '12345');
+    cy.get(dataCy.modal).as('modal');
+    cy.get('@modal').should('be.visible');
+    cy.get(dataCy.orderId).should('contain', '12345');
   });
 
   it('закрывает модальное окно заказа кнопкой ✕', () => {
     cy.contains('Оформить заказ').click();
     cy.wait('@createOrder');
-    cy.get('[data-cy="modal"]').should('be.visible');
-    cy.get('[data-cy="modal-close-button"]').click();
-    cy.get('[data-cy="modal"]').should('not.exist');
+    cy.get(dataCy.modal).as('modal');
+    cy.get('@modal').should('be.visible');
+    cy.get(dataCy.modalCloseBtn).click();
+    cy.get('@modal').should('not.exist');
   });
 
   it('закрывает модальное окно заказа кликом на оверлей', () => {
     cy.contains('Оформить заказ').click();
     cy.wait('@createOrder');
-    cy.get('[data-cy="modal"]').should('be.visible');
-    cy.get('[data-cy="modal-overlay"]').click({ force: true });
-    cy.get('[data-cy="modal"]').should('not.exist');
+    cy.get(dataCy.modal).as('modal');
+    cy.get('@modal').should('be.visible');
+    cy.get(dataCy.modalOverlay).click({ force: true });
+    cy.get('@modal').should('not.exist');
   });
 
   it('закрывает модальное окно заказа клавишей Escape', () => {
     cy.contains('Оформить заказ').click();
     cy.wait('@createOrder');
-    cy.get('[data-cy="modal"]').should('be.visible');
+    cy.get(dataCy.modal).as('modal');
+    cy.get('@modal').should('be.visible');
     cy.get('body').type('{esc}');
-    cy.get('[data-cy="modal"]').should('not.exist');
+    cy.get('@modal').should('not.exist');
   });
 });
