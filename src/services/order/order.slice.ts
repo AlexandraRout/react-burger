@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { unknownError } from '../../shared/unknown-error';
 import { createOrder } from './order.thunks';
 import { IOrderState } from '../../types';
 
-const initialState: IOrderState = {
+export const initialState: IOrderState = {
   orderId: null,
   isLoading: false,
   error: null,
@@ -29,7 +30,7 @@ const orderSlice = createSlice({
       })
       .addCase(createOrder.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload ?? null;
+        state.error = action.payload ?? unknownError;
         state.orderId = null;
       });
   },

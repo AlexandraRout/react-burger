@@ -4,7 +4,7 @@
     "react-app/jest"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "cypress"],
   "env": {
     "browser": true,
     "es2021": true
@@ -19,6 +19,18 @@
       }
     }
   },
+  "overrides": [
+    {
+      "files": ["cypress/**/*.ts", "cypress/**/*.js"],
+      "extends": ["plugin:cypress/recommended"],
+      "env": {
+        "cypress/globals": true
+      },
+      "rules": {
+        "import/no-extraneous-dependencies": "off"
+      }
+    }
+  ],
   "rules": {
     "react/require-default-props": ["error", {
       "functions": "defaultArguments"
@@ -45,6 +57,7 @@
     "@typescript-eslint/no-shadow": "error",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "error",
+    "import/prefer-default-export": "off",
     "max-len": ["error", 120, 2, {
       "ignoreUrls": true,
       "ignoreComments": false,

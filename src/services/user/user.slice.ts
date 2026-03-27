@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { unknownError } from '../../shared/unknown-error';
 import {
   registerUser,
   loginUser, logoutUser, fetchUser, resetPasswordUser, updateUser, confirmPasswordReset,
@@ -6,7 +7,7 @@ import {
 import { deleteCookie, getCookie, setCookie } from '../../utils/cookies';
 import { IUserState } from '../../types';
 
-const initialState: IUserState = {
+export const initialState: IUserState = {
   user: null,
   email: null,
   isAuthChecked: false,
@@ -33,7 +34,7 @@ const userSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload ?? null;
+        state.error = action.payload ?? unknownError;
       })
     // Логин
       .addCase(loginUser.pending, (state) => {
@@ -48,7 +49,7 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload ?? null;
+        state.error = action.payload ?? unknownError;
         state.isAuthChecked = false;
       })
     // Получение пользователя
@@ -63,7 +64,7 @@ const userSlice = createSlice({
       })
       .addCase(fetchUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload ?? null;
+        state.error = action.payload ?? unknownError;
         deleteCookie('accessToken');
       })
     // Обновление пользователя
@@ -77,7 +78,7 @@ const userSlice = createSlice({
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload ?? null;
+        state.error = action.payload ?? unknownError;
       })
     // Логаут
       .addCase(logoutUser.fulfilled, (state) => {
@@ -86,7 +87,7 @@ const userSlice = createSlice({
         state.isAuthChecked = false;
       })
       .addCase(logoutUser.rejected, (state, action) => {
-        state.error = action.payload ?? null;
+        state.error = action.payload ?? unknownError;
       })
     // Смена пароля
       .addCase(resetPasswordUser.fulfilled, (state) => {

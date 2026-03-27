@@ -2,13 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 import { IOrder } from '../../types';
 import fetchOrderByNumber from './order-details.thunks';
 
-interface IOrderDetailsState {
+export interface IOrderDetailsState {
   order: IOrder | null;
   isLoading: boolean;
   error: string | null;
 }
 
-const initialState: IOrderDetailsState = {
+export const initialState: IOrderDetailsState = {
   order: null,
   isLoading: false,
   error: null,

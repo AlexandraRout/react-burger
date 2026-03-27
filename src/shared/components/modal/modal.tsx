@@ -38,15 +38,17 @@ export default function Modal({
       <div className={modalStyles.modal_overlay}>
         <ModalOverlay onClick={onClose} />
       </div>
-      <div className={modalStyles.modal}>
+      <div data-cy="modal" className={modalStyles.modal}>
         <div className={modalStyles.header}>
           {title && (typeof title === 'string'
             ? <h2 className="text text_type_main-large">{title}</h2>
             : title
           )}
-          <Button htmlType="button" type="secondary" size="small" extraClass={modalStyles.close_button} onClick={onClose}>
-            <CloseIcon type="primary" />
-          </Button>
+          <div data-cy="modal-close-button">
+            <Button htmlType="button" type="secondary" size="small" extraClass={modalStyles.close_button} onClick={onClose}>
+              <CloseIcon type="primary" />
+            </Button>
+          </div>
         </div>
         <div className={modalStyles.content}>
           {children}
