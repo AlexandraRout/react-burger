@@ -12,7 +12,7 @@ function setupPage() {
   cy.intercept('POST', '**/api/orders', { fixture: 'order.json' }).as('createOrder');
   cy.intercept('GET', '**/auth/user', { fixture: 'user.json' }).as('getUser');
 
-  cy.visit('/', {
+  cy.visit('/react-burger', {
     onBeforeLoad(win) {
       win.localStorage.setItem('refreshToken', 'test-refresh-token');
     },
