@@ -76,6 +76,16 @@ describe('Модальное окно ингредиента', () => {
     cy.get('[data-cy="modal"]').should('contain', 'Детали ингредиента');
   });
 
+  it('отображает данные ингредиента в модальном окне', () => {
+    cy.get('[data-cy="ingredient-card"]').eq(0).click();
+    cy.get('[data-cy="modal"]').should('be.visible');
+    cy.get('[data-cy="modal"]').should('contain', 'Краторная булка N-200i');
+    cy.get('[data-cy="modal"]').should('contain', '420'); // calories
+    cy.get('[data-cy="modal"]').should('contain', '80'); // proteins
+    cy.get('[data-cy="modal"]').should('contain', '24'); // fat
+    cy.get('[data-cy="modal"]').should('contain', '53'); // carbohydrates
+  });
+
   it('закрывает модальное окно кнопкой ✕', () => {
     cy.get('[data-cy="ingredient-card"]').eq(0).click();
     cy.get('[data-cy="modal"]').should('be.visible');
