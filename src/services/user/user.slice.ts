@@ -6,7 +6,7 @@ import {
 import { deleteCookie, getCookie, setCookie } from '../../utils/cookies';
 import { IUserState } from '../../types';
 
-const initialState: IUserState = {
+export const initialState: IUserState = {
   user: null,
   email: null,
   isAuthChecked: false,

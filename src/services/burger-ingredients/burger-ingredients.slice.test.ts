@@ -1,12 +1,6 @@
-import reducer from './burger-ingredients.slice';
+import reducer, { initialState } from './burger-ingredients.slice';
 import fetchIngredients from './burger-ingredients.thunks';
 import { IBurgerIngredientsState, IIngredient, IngredientType } from '../../types';
-
-const initialState: IBurgerIngredientsState = {
-  items: [],
-  isLoading: false,
-  error: null,
-};
 
 const ingredient: IIngredient = {
   _id: '1',

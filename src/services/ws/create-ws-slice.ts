@@ -2,7 +2,7 @@ import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IOrderFeedMessage, IOrderFeedState } from '../../types';
 import type { TWsActionTypes } from './websocket-middleware';
 
-const initialState: IOrderFeedState = {
+export const initialState: IOrderFeedState = {
   orders: [],
   total: 0,
   totalToday: 0,

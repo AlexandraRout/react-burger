@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import fetchIngredients from './burger-ingredients.thunks';
 import { IBurgerIngredientsState } from '../../types';
 
-const initialState: IBurgerIngredientsState = {
+export const initialState: IBurgerIngredientsState = {
   items: [],
   isLoading: false,
   error: null,

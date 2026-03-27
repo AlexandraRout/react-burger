@@ -3,6 +3,7 @@ import reducer, {
   removeIngredientFromConstructor,
   moveIngredientInConstructor,
   removeAllIngredientsFromConstructor,
+  initialState,
 } from './burger-constructor.slice';
 import {
   IBurgerConstructorState, IIngredient, IIngredientWithUUID, IngredientType,
@@ -20,10 +21,6 @@ jest.mock('@reduxjs/toolkit', () => {
     },
   };
 });
-
-const initialState: IBurgerConstructorState = {
-  ingredients: [],
-};
 
 const bun: IIngredient = {
   _id: '1',

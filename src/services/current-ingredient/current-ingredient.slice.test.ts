@@ -1,12 +1,9 @@
 import reducer, {
   setCurrentIngredient,
   clearCurrentIngredient,
+  initialState,
 } from './current-ingredient.slice';
 import { ICurrentIngredientState, IIngredient, IngredientType } from '../../types';
-
-const initialState: ICurrentIngredientState = {
-  ingredient: null,
-};
 
 const ingredient: IIngredient = {
   _id: '1',

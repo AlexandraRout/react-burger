@@ -1,18 +1,6 @@
-import reducer, { clearOrder } from './order-details.slice';
+import reducer, { clearOrder, initialState, IOrderDetailsState } from './order-details.slice';
 import fetchOrderByNumber from './order-details.thunks';
 import { IOrder, OrderStatus } from '../../types';
-
-interface IOrderDetailsState {
-  order: IOrder | null;
-  isLoading: boolean;
-  error: string | null;
-}
-
-const initialState: IOrderDetailsState = {
-  order: null,
-  isLoading: false,
-  error: null,
-};
 
 const order: IOrder = {
   _id: 'abc123',

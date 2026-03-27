@@ -1,13 +1,6 @@
-import reducer, { updateTotalPrice } from './order.slice';
+import reducer, { updateTotalPrice, initialState } from './order.slice';
 import { createOrder } from './order.thunks';
 import { IOrderApiResponse, IOrderState } from '../../types';
-
-const initialState: IOrderState = {
-  orderId: null,
-  isLoading: false,
-  error: null,
-  totalPrice: 0,
-};
 
 const orderResponse: IOrderApiResponse = {
   success: true,

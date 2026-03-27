@@ -1,4 +1,4 @@
-import reducer from './user.slice';
+import reducer, { initialState } from './user.slice';
 import {
   registerUser,
   loginUser,
@@ -20,15 +20,6 @@ jest.mock('../../utils/cookies', () => ({
 const user: IUser = {
   name: 'Test User',
   email: 'test@example.com',
-};
-
-const initialState: IUserState = {
-  user: null,
-  email: null,
-  isAuthChecked: false,
-  forgotPasswordStep: false,
-  isLoading: false,
-  error: null,
 };
 
 const loadingState: IUserState = { ...initialState, isLoading: true };

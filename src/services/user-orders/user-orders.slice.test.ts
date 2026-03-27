@@ -1,18 +1,10 @@
 import reducer from './user-orders.slice';
-import createWsSlice from '../ws/create-ws-slice';
+import createWsSlice, { initialState } from '../ws/create-ws-slice';
 import {
   IOrder, IOrderFeedMessage, IOrderFeedState, OrderStatus,
 } from '../../types';
 
 const { actions } = createWsSlice('userOrders');
-
-const initialState: IOrderFeedState = {
-  orders: [],
-  total: 0,
-  totalToday: 0,
-  isConnected: false,
-  error: null,
-};
 
 const order: IOrder = {
   _id: 'abc123',

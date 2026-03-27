@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { addIngredient, moveIngredient, removeIngredient } from './burger-constructor.service';
 import { IBurgerConstructorState, IIngredient } from '../../types';
 
-const initialState: IBurgerConstructorState = {
+export const initialState: IBurgerConstructorState = {
   ingredients: [],
 };
 
