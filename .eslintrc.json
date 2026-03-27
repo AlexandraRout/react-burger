@@ -1,8 +1,7 @@
 {
   "extends": [
     "airbnb",
-    "react-app/jest",
-    "plugin:cypress/recommended"
+    "react-app/jest"
   ],
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint", "cypress"],
