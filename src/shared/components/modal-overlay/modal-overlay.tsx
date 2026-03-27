@@ -11,6 +11,7 @@ export default function ModalOverlay({ onClick }: IModalOverlayProps) {
       role="button"
       aria-label="Закрыть модальное окно"
       aria-hidden
+      data-cy="modal-overlay"
       className={modalOverlayStyles.modal_overlay}
       onClick={onClick}
     />

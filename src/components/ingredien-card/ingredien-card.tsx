@@ -41,6 +41,7 @@ export default function IngredientsCard({ ingredient, onClick }: IIngredientsCar
       ref={cardRef}
       role="button"
       tabIndex={0}
+      data-cy="ingredient-card"
       className={ingredientCardStyles.ingredient_card}
       style={{ opacity: isDrag ? 0.5 : 1 }}
       onClick={() => onClick(ingredient)}

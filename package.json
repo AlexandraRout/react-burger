@@ -29,7 +29,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "./node_modules/.bin/cypress open"
   },
   "browserslist": {
     "production": [
@@ -44,6 +45,8 @@
     ]
   },
   "devDependencies": {
-    "eslint-config-airbnb": "^19.0.4"
+    "cypress": "^14.5.4",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-cypress": "^2.15.2"
   }
 }

@@ -64,6 +64,7 @@ export default function BurgerConstructor() {
   return (
     <section
       ref={sectionRef}
+      data-cy="constructor-drop-area"
       className={burgerConstructorStyles.burger_constructor}
       style={{ opacity: isOver ? 0.5 : 1 }}
     >
