@@ -1,14 +1,8 @@
 import reducer, { updateTotalPrice, initialState } from './order.slice';
 import { createOrder } from './order.thunks';
-import { IOrderApiResponse, IOrderState } from '../../types';
-
-const orderResponse: IOrderApiResponse = {
-  success: true,
-  name: 'Краторный бургер',
-  order: {
-    number: 12345,
-  },
-};
+import { IOrderState } from '../../types';
+import { mockOrderApiResponse as orderResponse } from '../../shared/mocks/order-mock';
+import { unknownError } from '../../shared/unknown-error';
 
 describe('order reducer', () => {
   it('should return the initial state', () => {
@@ -90,6 +84,6 @@ describe('order reducer', () => {
     );
 
     expect(state.isLoading).toBe(false);
-    expect(state.error).toBe('Произошла неизвестная ошибка');
+    expect(state.error).toBe(unknownError);
   });
 });

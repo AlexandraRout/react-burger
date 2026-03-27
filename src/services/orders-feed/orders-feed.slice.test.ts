@@ -1,20 +1,9 @@
 import reducer from './orders-feed.slice';
 import createWsSlice, { initialState } from '../ws/create-ws-slice';
-import {
-  IOrder, IOrderFeedMessage, IOrderFeedState, OrderStatus,
-} from '../../types';
+import { IOrder, IOrderFeedMessage, IOrderFeedState } from '../../types';
+import { mockOrder as order } from '../../shared/mocks/order-mock';
 
 const { actions } = createWsSlice('ordersFeed');
-
-const order: IOrder = {
-  _id: 'abc123',
-  ingredients: ['id1', 'id2'],
-  status: OrderStatus.Done,
-  name: 'Краторный бургер',
-  number: 12345,
-  createdAt: '2025-01-01T00:00:00.000Z',
-  updatedAt: '2025-01-01T00:01:00.000Z',
-};
 
 const message: IOrderFeedMessage = {
   success: true,

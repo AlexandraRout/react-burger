@@ -8,6 +8,7 @@ import reducer, {
 import {
   IBurgerConstructorState, IIngredient, IIngredientWithUUID, IngredientType,
 } from '../../types';
+import { mockBun as bun, mockSauce as sauce, mockMain as main } from '../../shared/mocks/ingredients-mock';
 
 jest.mock('@reduxjs/toolkit', () => {
   const actual = jest.requireActual('@reduxjs/toolkit');
@@ -21,51 +22,6 @@ jest.mock('@reduxjs/toolkit', () => {
     },
   };
 });
-
-const bun: IIngredient = {
-  _id: '1',
-  name: 'Краторная булка N-200i',
-  type: IngredientType.Bun,
-  proteins: 80,
-  fat: 24,
-  carbohydrates: 53,
-  calories: 420,
-  price: 1255,
-  image: 'https://code.s3.yandex.net/react/code/bun-02.png',
-  image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
-  image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png',
-  __v: 0,
-};
-
-const sauce: IIngredient = {
-  _id: '2',
-  name: 'Соус Spicy-X',
-  type: IngredientType.Sauce,
-  proteins: 30,
-  fat: 20,
-  carbohydrates: 40,
-  calories: 30,
-  price: 90,
-  image: 'https://code.s3.yandex.net/react/code/sauce-02.png',
-  image_mobile: 'https://code.s3.yandex.net/react/code/sauce-02-mobile.png',
-  image_large: 'https://code.s3.yandex.net/react/code/sauce-02-large.png',
-  __v: 0,
-};
-
-const main: IIngredient = {
-  _id: '3',
-  name: 'Филе Люминесцентного тетраодонтимформа',
-  type: IngredientType.Main,
-  proteins: 44,
-  fat: 26,
-  carbohydrates: 85,
-  calories: 643,
-  price: 988,
-  image: 'https://code.s3.yandex.net/react/code/meat-03.png',
-  image_mobile: 'https://code.s3.yandex.net/react/code/meat-03-mobile.png',
-  image_large: 'https://code.s3.yandex.net/react/code/meat-03-large.png',
-  __v: 0,
-};
 
 describe('burgerConstructor reducer', () => {
   it('should return the initial state', () => {

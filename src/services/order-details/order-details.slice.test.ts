@@ -1,16 +1,6 @@
 import reducer, { clearOrder, initialState, IOrderDetailsState } from './order-details.slice';
 import fetchOrderByNumber from './order-details.thunks';
-import { IOrder, OrderStatus } from '../../types';
-
-const order: IOrder = {
-  _id: 'abc123',
-  ingredients: ['id1', 'id2', 'id3'],
-  status: OrderStatus.Done,
-  name: 'Краторный бургер',
-  number: 12345,
-  createdAt: '2025-01-01T00:00:00.000Z',
-  updatedAt: '2025-01-01T00:01:00.000Z',
-};
+import { mockOrder as order } from '../../shared/mocks/order-mock';
 
 describe('orderDetails reducer', () => {
   it('should return the initial state', () => {

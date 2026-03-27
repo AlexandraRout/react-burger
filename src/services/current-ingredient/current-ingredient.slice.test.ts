@@ -3,22 +3,8 @@ import reducer, {
   clearCurrentIngredient,
   initialState,
 } from './current-ingredient.slice';
-import { ICurrentIngredientState, IIngredient, IngredientType } from '../../types';
-
-const ingredient: IIngredient = {
-  _id: '1',
-  name: 'Краторная булка N-200i',
-  type: IngredientType.Bun,
-  proteins: 80,
-  fat: 24,
-  carbohydrates: 53,
-  calories: 420,
-  price: 1255,
-  image: 'https://code.s3.yandex.net/react/code/bun-02.png',
-  image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
-  image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png',
-  __v: 0,
-};
+import { ICurrentIngredientState, IIngredient } from '../../types';
+import { mockBun as ingredient } from '../../shared/mocks/ingredients-mock';
 
 describe('currentIngredient reducer', () => {
   it('should return the initial state', () => {

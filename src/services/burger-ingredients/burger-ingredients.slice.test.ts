@@ -1,21 +1,8 @@
 import reducer, { initialState } from './burger-ingredients.slice';
 import fetchIngredients from './burger-ingredients.thunks';
-import { IBurgerIngredientsState, IIngredient, IngredientType } from '../../types';
-
-const ingredient: IIngredient = {
-  _id: '1',
-  name: 'Краторная булка N-200i',
-  type: IngredientType.Bun,
-  proteins: 80,
-  fat: 24,
-  carbohydrates: 53,
-  calories: 420,
-  price: 1255,
-  image: 'https://code.s3.yandex.net/react/code/bun-02.png',
-  image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
-  image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png',
-  __v: 0,
-};
+import { IBurgerIngredientsState } from '../../types';
+import { mockBun as ingredient } from '../../shared/mocks/ingredients-mock';
+import { unknownError } from '../../shared/unknown-error';
 
 const errorMessage = 'Ошибка загрузки ингредиентов';
 
@@ -50,7 +37,7 @@ describe('burgerIngredients reducer', () => {
       isLoading: true,
       error: null,
     };
-    const ingredients: IIngredient[] = [ingredient];
+    const ingredients = [ingredient];
 
     const state = reducer(
       loadingState,
@@ -106,6 +93,6 @@ describe('burgerIngredients reducer', () => {
     );
 
     expect(state.isLoading).toBe(false);
-    expect(state.error).toBe('Произошла неизвестная ошибка');
+    expect(state.error).toBe(unknownError);
   });
 });

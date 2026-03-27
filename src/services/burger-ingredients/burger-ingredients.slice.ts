@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { unknownError } from '../../shared/unknown-error';
 import fetchIngredients from './burger-ingredients.thunks';
 import { IBurgerIngredientsState } from '../../types';
 
@@ -24,7 +25,7 @@ const burgerIngredientsSlice = createSlice({
       })
       .addCase(fetchIngredients.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload ?? 'Произошла неизвестная ошибка';
+        state.error = action.payload ?? unknownError;
         state.items = [];
       });
   },

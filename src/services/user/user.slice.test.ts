@@ -10,17 +10,14 @@ import {
 } from './user.thunks';
 import { IUser, IUserState } from '../../types';
 import { deleteCookie, setCookie } from '../../utils/cookies';
+import { mockUser as user } from '../../shared/mocks/user-mock';
+import { unknownError } from '../../shared/unknown-error';
 
 jest.mock('../../utils/cookies', () => ({
   getCookie: jest.fn(() => ''),
   setCookie: jest.fn(),
   deleteCookie: jest.fn(),
 }));
-
-const user: IUser = {
-  name: 'Test User',
-  email: 'test@example.com',
-};
 
 const loadingState: IUserState = { ...initialState, isLoading: true };
 
@@ -79,7 +76,7 @@ describe('user reducer', () => {
         registerUser.rejected(null, '', { name: '', email: '', password: '' }),
       );
 
-      expect(state.error).toBe('Произошла неизвестная ошибка');
+      expect(state.error).toBe(unknownError);
     });
   });
 
